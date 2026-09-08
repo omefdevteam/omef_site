@@ -247,10 +247,8 @@
           <div class="involved-card">
             <div class="involved-icon"><i class="fa-solid fa-heart-pulse"></i></div>
             <h3 class="involved-title">Support a Programme</h3>
-            <p class="involved-desc">Help a defined programme move responsibly from initial design toward measurable,
-              lasting delivery.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Support
-              Work</button>
+            <p class="involved-desc">Help a defined programme move responsibly from initial design toward measurable, lasting delivery.</p>
+            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Support Work</button>
           </div>
 
           <div class="involved-card">
@@ -272,16 +270,7 @@
 
         </div>
 
-        <div class="editorial-notice"
-          style="margin-top: 36px; max-width: 900px; margin-left: auto; margin-right: auto;">
-          <i class="fa-solid fa-shield-halved"></i>
-          <div>
-            <strong>Support a Programme Editorial Note:</strong> Before donation functionality goes live: confirm legal
-            entity and receipting language, publish terms and privacy information, define restricted vs. unrestricted
-            fund treatment, set the acknowledgement and reporting workflow, and complete payment security and
-            accessibility checks.
-          </div>
-        </div>
+
       </section>
 
       <!-- Multi-Track Contact Form -->
@@ -336,30 +325,7 @@
           <!-- Right Form -->
           <div class="contact-form-panel">
 
-            <div class="form-feedback-alert success" id="contact-success-alert">
-              <i class="fa-solid fa-circle-check" style="font-size: 1.3rem;"></i>
-              <div>
-                <strong>Success:</strong> “Thank you for contacting Our Mother Earth Foundation. We have received your
-                enquiry and will direct it to the appropriate team. In the meantime, you may wish to explore our
-                programmes, upcoming events or latest insights.”
-              </div>
-            </div>
-
-            <div class="form-feedback-alert validation" id="contact-val-alert">
-              <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.3rem;"></i>
-              <div>
-                <strong>Validation:</strong> “Please review the highlighted fields and provide the information needed to
-                send your enquiry.”
-              </div>
-            </div>
-
-            <div class="form-feedback-alert error" id="contact-error-alert">
-              <i class="fa-solid fa-circle-xmark" style="font-size: 1.3rem;"></i>
-              <div>
-                <strong>Error:</strong> “We were unable to send your enquiry. Please try again. If the issue continues,
-                use the alternative contact route shown below.”
-              </div>
-            </div>
+            <div id="contact-feedback-area"></div>
 
             <form id="contact-form" novalidate>
 

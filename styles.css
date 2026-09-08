@@ -362,24 +362,9 @@ select {
   box-shadow: 0 0 8px currentColor;
 }
 
-/* Editorial Note Notice Box */
-.editorial-notice {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: rgba(212, 175, 55, 0.06);
-  border-left: 3px solid var(--gold-500);
-  padding: 16px 20px;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  margin-top: 24px;
-  font-size: 0.885rem;
-  color: var(--text-secondary);
-}
-
-.editorial-notice i {
-  color: var(--gold-400);
-  font-size: 1.15rem;
-  margin-top: 2px;
+/* Form Feedback Alert (Hidden by default, displayed dynamically on user submit) */
+.form-feedback-alert {
+  display: none;
 }
 
 /* ==========================================================================

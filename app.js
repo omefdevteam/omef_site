@@ -256,9 +256,7 @@ window.setContactInquiry = function(inquiryType) {
 
 function initContactForm() {
   const form = document.getElementById('contact-form');
-  const successAlert = document.getElementById('contact-success-alert');
-  const valAlert = document.getElementById('contact-val-alert');
-  const errorAlert = document.getElementById('contact-error-alert');
+  const feedbackArea = document.getElementById('contact-feedback-area');
 
   if (!form) return;
 
@@ -273,9 +271,7 @@ function initContactForm() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    if (successAlert) successAlert.style.display = 'none';
-    if (valAlert) valAlert.style.display = 'none';
-    if (errorAlert) errorAlert.style.display = 'none';
+    if (feedbackArea) feedbackArea.innerHTML = '';
 
     const inquiryType = document.getElementById('contact-inquiry-type');
     const name = document.getElementById('contact-name');
@@ -309,9 +305,14 @@ function initContactForm() {
     }
 
     if (!isValid) {
-      if (valAlert) {
-        valAlert.style.display = 'flex';
-        valAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (feedbackArea) {
+        feedbackArea.innerHTML = `
+          <div style="margin-bottom: 20px; padding: 14px 18px; border-radius: var(--radius-sm); background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--gold-300); display: flex; gap: 12px; align-items: center; font-size: 0.9rem;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; color: var(--gold-400); flex-shrink: 0;"></i>
+            <div>Please review the highlighted fields and provide the required information to send your enquiry.</div>
+          </div>
+        `;
+        feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
       return;
     }
@@ -324,12 +325,20 @@ function initContactForm() {
     setTimeout(() => {
       submitBtn.innerHTML = originalBtnText;
       submitBtn.disabled = false;
-      if (successAlert) {
-        successAlert.style.display = 'flex';
-        form.reset();
-        successAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      form.reset();
+      if (feedbackArea) {
+        feedbackArea.innerHTML = `
+          <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-md); background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #ecfdf5; display: flex; gap: 16px; align-items: flex-start; font-size: 0.95rem; line-height: 1.65;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.5rem; color: var(--emerald-accent); margin-top: 2px; flex-shrink: 0;"></i>
+            <div>
+              <h4 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 6px; font-weight: 600;">Enquiry Received</h4>
+              <p>Thank you for contacting Our Mother Earth Foundation. We have received your enquiry and will direct it to the appropriate team. In the meantime, you may wish to explore our programmes, upcoming events or latest insights.</p>
+            </div>
+          </div>
+        `;
+        feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
-    }, 900);
+    }, 800);
   });
 }
 
