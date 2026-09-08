@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results, Methodologies & Media Centre | OMEF</title>
+  <meta name="description" content="Explore OMEF methodologies lifecycle, scientific working papers, community case studies, news, and downloadable media kits.">
+  
+  <link rel="icon" type="image/png" href="omef_Logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" aria-label="Our Mother Earth Foundation Home">
+        <img src="omef_Logo.png" alt="OMEF Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">Our Mother Earth</span>
+          <span class="brand-subtitle">Foundation · OMEF</span>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">
+              <span>About</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </a>
+            <div class="nav-dropdown">
+              <a href="about.html#story" class="dropdown-link"><i class="fa-solid fa-seedling"></i> The Story of Ourselves</a>
+              <a href="about.html#mission-vision" class="dropdown-link"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a>
+              <a href="about.html#beliefs" class="dropdown-link"><i class="fa-solid fa-hand-holding-heart"></i> 7 Core Beliefs</a>
+              <a href="about.html#approach" class="dropdown-link"><i class="fa-solid fa-compass"></i> Our 5 Approaches</a>
+              <a href="about.html#governance" class="dropdown-link"><i class="fa-solid fa-shield-halved"></i> Governance & Charter</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="our-work.html" class="nav-link">
+              <span>Our Work</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </a>
+            <div class="nav-dropdown">
+              <a href="our-work.html#pathways" class="dropdown-link"><i class="fa-solid fa-layer-group"></i> 5 Delivery Pathways</a>
+              <a href="our-work.html#delivery" class="dropdown-link"><i class="fa-solid fa-route"></i> 6-Phase Discipline</a>
+              <a href="our-work.html#tano" class="dropdown-link"><i class="fa-solid fa-water"></i> Tano River: A Vision</a>
+              <a href="our-work.html#asanteman" class="dropdown-link"><i class="fa-solid fa-microchip"></i> Asanteman Digital Future</a>
+            </div>
+          </li>
+          <li class="nav-item"><a href="kumasi2027.html" class="nav-link">Kumasi 2027</a></li>
+          <li class="nav-item"><a href="impact.html" class="nav-link">Impact</a></li>
+          <li class="nav-item"><a href="partners.html" class="nav-link">Partners</a></li>
+          <li class="nav-item">
+            <a href="results.html" class="nav-link active">
+              <span>Results & Media</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </a>
+            <div class="nav-dropdown">
+              <a href="#methodologies" class="dropdown-link"><i class="fa-solid fa-diagram-project"></i> Methodology Tracker</a>
+              <a href="#publications" class="dropdown-link"><i class="fa-solid fa-book-open"></i> Publications & Cases</a>
+              <a href="#media" class="dropdown-link"><i class="fa-solid fa-newspaper"></i> News & Media Kit</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="search-trigger-btn" onclick="openModal('search-modal')" aria-label="Search Website">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Contact Us</span>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+    <!-- Mobile Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <div class="brand-link">
+        <img src="omef_Logo.png" alt="OMEF" class="brand-logo-img" style="width: 40px; height: 40px;">
+        <div class="brand-text">
+          <span class="brand-title" style="font-size: 0.95rem;">Our Mother Earth</span>
+          <span class="brand-subtitle" style="font-size: 0.65rem; color: var(--gold-400);">Foundation · OMEF</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobile-close-btn" aria-label="Close Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-body">
+      <div class="drawer-section-label">Navigation Menu</div>
+      <ul class="mobile-drawer-links">
+        <li>
+          <a href="index.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-house"></i></span>
+              <span>Home</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-seedling"></i></span>
+              <span>About Us</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="our-work.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-briefcase"></i></span>
+              <span>Our Work & Flagships</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="kumasi2027.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-calendar-star"></i></span>
+              <span>Africa Climate Week 2027</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="impact.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-chart-line"></i></span>
+              <span>Impact & Transparency</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="partners.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-handshake"></i></span>
+              <span>Partners</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="results.html" class="mobile-nav-item active">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-book-open"></i></span>
+              <span>Results & Media</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="contact.html" class="mobile-nav-item">
+            <span class="drawer-link-content">
+              <span class="drawer-icon"><i class="fa-solid fa-paper-plane"></i></span>
+              <span>Contact & Get Involved</span>
+            </span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mobile-drawer-footer">
+      <a href="contact.html" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+        <i class="fa-solid fa-envelope"></i> Send an Enquiry
+      </a>
+      <div class="drawer-contact-mini">
+        <span><i class="fa-solid fa-location-dot"></i> Kumasi, Ghana & International Hubs</span>
+        <span><i class="fa-solid fa-envelope"></i> enquiries@ourmotherearth.org</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-tag"><i class="fa-solid fa-book-open"></i> Results & Knowledge Hub</span>
+      <h1 class="page-hero-title">Knowledge That Enables Action</h1>
+      <p class="page-hero-subtitle">
+        Knowledge pays its way when it enables people to act. Here we gather together publications, methodologies, case studies, community perspectives, and educational resources—all with a named author or institutional owner, publication date, and transparent status.
+      </p>
+      <div class="breadcrumb-nav">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
+        <span>Results & Media</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="section-padding">
+    <div class="container">
+
+      <!-- Methodology Status Pipeline -->
+      <section id="methodologies" style="margin-bottom: 80px;">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-tag"><i class="fa-solid fa-diagram-project"></i> Rigorous Methodologies</span>
+          <h2 class="section-title">Methodology Development Lifecycle</h2>
+          <p class="section-subtitle">
+            Methodologies give us a common way of defining activities, safeguards, evidence, and outcomes. We endorse development where on-the-ground experience translates into something transparent and repeatable.
+          </p>
+        </div>
+
+        <div class="methodology-pipeline-bar">
+          <div class="pipeline-stage active">
+            <i class="fa-solid fa-pencil"></i>
+            <div>
+              <strong>1. In Development</strong>
+              <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">Research, consultation or drafting underway</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right pipeline-arrow"></i>
+          <div class="pipeline-stage">
+            <i class="fa-solid fa-file-export"></i>
+            <div>
+              <strong>2. Submitted</strong>
+              <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">Formally provided to a named body</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right pipeline-arrow"></i>
+          <div class="pipeline-stage">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <div>
+              <strong>3. Under Review</strong>
+              <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">Review confirmed by receiving body</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-right pipeline-arrow"></i>
+          <div class="pipeline-stage">
+            <i class="fa-solid fa-circle-check"></i>
+            <div>
+              <strong>4. Approved</strong>
+              <span style="display: block; font-size: 0.75rem; color: var(--text-muted);">Formal approval available and linked</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <a href="contact.html" class="btn btn-outline-gold btn-sm"><i class="fa-solid fa-handshake"></i> Bring Your Methodology Expertise</a>
+        </div>
+      </section>
+
+      <!-- Publications & Case Studies -->
+      <section id="publications" style="margin-bottom: 80px;">
+        <div class="section-header" style="margin-bottom: 36px;">
+          <span class="section-tag"><i class="fa-solid fa-microscope"></i> Case Studies & Papers</span>
+          <h2 class="section-title">Case Studies & Community Perspectives</h2>
+          <p class="section-subtitle">
+            A case study should tell you what happened, why it was important, who was involved, what evidence supports it, and what we learned (including what didn’t work).
+          </p>
+        </div>
+
+        <div class="pillars-grid" style="margin-bottom: 40px;">
+          
+          <div class="pillar-card">
+            <span class="status-pill development" style="margin-bottom: 12px;">Working Paper</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">
+              River Basin Stewardship in Sub-Saharan Africa
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px;">
+              Examining participatory riparian zone restoration, agricultural buffer systems, and native species re-establishment across degraded watersheds.
+            </p>
+            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-hairline); padding-top: 12px;">
+              Author: OMEF Technical Working Group · Date: 2026
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <span class="status-pill target" style="margin-bottom: 12px;">Curriculum Framework</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">
+              Cybersecurity & AI Trust for Emerging Leaders
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px;">
+              Five-strand modular learning designed to anchor high-level digital competence within indigenous regional governance and enterprise contexts.
+            </p>
+            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-hairline); padding-top: 12px;">
+              Author: Asanteman Education Coalition & CFF
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <span class="status-pill verified" style="margin-bottom: 12px;">Community Perspective</span>
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px;">
+              Informed Consent & Local Rights in Land Recovery
+            </h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 18px;">
+              Why community consensus and traditional leadership covenants are indispensable before any rehabilitation activity begins.
+            </p>
+            <div style="font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border-hairline); padding-top: 12px;">
+              Author: Community Voices Programme
+            </div>
+          </div>
+
+        </div>
+
+        <div class="philosophy-quote-box" style="padding: 32px; text-align: center;">
+          <div class="quote-highlight-text" style="font-size: 1.25rem; margin-bottom: 8px;">
+            “The knowledge that is in the communities is not an add-on to the work. It is the foundation on which the work has to be built.”
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Community Knowledge Principle</span>
+        </div>
+      </section>
+
+      <!-- News & Media Centre -->
+      <section id="media" class="kumasi-hero-box" style="padding: 48px;">
+        <div style="max-width: 860px; margin: 0 auto;">
+          <span class="section-tag" style="margin-bottom: 14px;"><i class="fa-solid fa-newspaper"></i> Media Centre</span>
+          <h2 style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 16px;">
+            News & Official Media Resources
+          </h2>
+          
+          <div class="philosophy-card" style="padding: 28px; margin-bottom: 32px; background: rgba(0,0,0,0.5);">
+            <span style="font-size: 0.75rem; color: var(--gold-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 10px;">
+              Approved Short Description
+            </span>
+            <p style="font-size: 1.2rem; font-style: italic; color: var(--text-primary); line-height: 1.65;">
+              “The Our Mother Earth Foundation connects people to restore nature, build stronger communities and unlock greater opportunity for future generations.”
+            </p>
+          </div>
+
+          <p style="font-size: 0.98rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 28px;">
+            Here you will find approved organisation descriptions, leadership biographies after approval, brand marks and guidance on their use, a rights-cleared image library, current press releases, event media information, and a direct media contact route.
+          </p>
+
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+            <button class="btn btn-primary" onclick="openModal('mediakit-modal')">
+              <i class="fa-solid fa-download"></i> Download Media Kit & Approved Assets
+            </button>
+            <a href="contact.html" class="btn btn-secondary" onclick="setContactInquiry('Media, governance and reporting')">
+              <i class="fa-solid fa-camera"></i> Media Enquiries
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <img src="omef_Logo.png" alt="OMEF" class="footer-logo-img">
+            <div>
+              <span class="brand-title" style="font-size: 1rem;">Our Mother Earth</span>
+              <span class="brand-subtitle">Foundation</span>
+            </div>
+          </div>
+          <p class="footer-tagline-statement">
+            Our Mother Earth Foundation unites people to restore nature, build communities and grow opportunity for future generations.
+          </p>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--gold-400); letter-spacing: 0.08em;">
+            People. Nature. Future.
+          </span>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">About</h4>
+          <ul class="footer-links-list">
+            <li><a href="about.html#story">About Us</a></li>
+            <li><a href="about.html#mission-vision">Mission & Beliefs</a></li>
+            <li><a href="about.html#beliefs">7 Core Beliefs</a></li>
+            <li><a href="about.html#approach">Our Approach</a></li>
+            <li><a href="about.html#governance">Governance & Charter</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Our Work</h4>
+          <ul class="footer-links-list">
+            <li><a href="our-work.html#pathways">Landscapes</a></li>
+            <li><a href="our-work.html#pathways">Nature Recovery</a></li>
+            <li><a href="our-work.html#pathways">Education & Digital</a></li>
+            <li><a href="our-work.html#pathways">Methodologies</a></li>
+            <li><a href="our-work.html#pathways">Community Development</a></li>
+            <li><a href="our-work.html#tano">Tano River Vision</a></li>
+            <li><a href="our-work.html#asanteman">Asanteman Digital</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Impact & Ideas</h4>
+          <ul class="footer-links-list">
+            <li><a href="impact.html">Impact Framework</a></li>
+            <li><a href="impact.html#labels">Measurement Labels</a></li>
+            <li><a href="impact.html#stories">Stories of Impact</a></li>
+            <li><a href="results.html#publications">Publications</a></li>
+            <li><a href="results.html#methodologies">Methods</a></li>
+            <li><a href="results.html#media">News & Media</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Events & Connect</h4>
+          <ul class="footer-links-list">
+            <li><a href="kumasi2027.html">Kumasi 2027</a></li>
+            <li><a href="our-work.html#events">COP & Pavilion</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="partners.html#collaborate">Become a Partner</a></li>
+            <li><a href="contact.html">Get Involved</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 thenovus.solutions. All rights reserved.
+        </div>
+        <div class="law-links">
+          <a href="#" onclick="openLegalModal('privacy')">Privacy</a>
+          <span>·</span>
+          <a href="#" onclick="openLegalModal('terms')">Terms of Use</a>
+          <span>·</span>
+          <a href="#" onclick="openLegalModal('accessibility')">Accessibility</a>
+          <span>·</span>
+          <a href="#" onclick="openLegalModal('safeguarding')">Safeguarding</a>
+          <span>·</span>
+          <a href="#" onclick="openLegalModal('complaints')">Complaints</a>
+          <span>·</span>
+          <a href="#" onclick="openLegalModal('org')">Organisation Details</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="search-modal" aria-hidden="true">
+    <div class="modal-dialog search-modal-dialog">
+      <button class="modal-close-btn" onclick="closeModal('search-modal')"><i class="fa-solid fa-xmark"></i></button>
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="site-search-input" class="search-input" placeholder="Search programmes, Kumasi 2027, partners, beliefs...">
+      </div>
+      <div class="search-results-list" id="search-results"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="mediakit-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="closeModal('mediakit-modal')"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-tag"><i class="fa-solid fa-download"></i> Official Assets</span>
+      <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: var(--text-primary);">
+        OMEF Brand Assets & Media Kit
+      </h3>
+      <div style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+        <p>Download official high-resolution raster and vector assets for Our Mother Earth Foundation.</p>
+        <div style="background: var(--bg-surface-elevated); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <img src="omef_Logo.png" alt="Logo preview" style="width: 50px; height: 50px; border-radius: 50%;">
+            <div>
+              <strong style="color: var(--text-primary); display: block;">Official OMEF Medallion Logo (PNG)</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">High Resolution 1254 x 1254px (RGBA)</span>
+            </div>
+          </div>
+          <a href="omef_Logo.png" download="omef_Logo.png" class="btn btn-primary btn-sm">
+            <i class="fa-solid fa-download"></i> Download
+          </a>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">
+          Usage Guidance: Please preserve the circular containment and rich gold and ivory palette without distortion.
+        </p>
+      </div>
+      <div style="margin-top: 24px; text-align: right;">
+        <button class="btn btn-secondary" onclick="closeModal('mediakit-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="legal-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="closeModal('legal-modal')"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-tag" id="legal-tag"><i class="fa-solid fa-scale-balanced"></i> Foundation Policy</span>
+      <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 16px; color: var(--text-primary);" id="legal-title">Policy Information</h3>
+      <div id="legal-content" style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.75;"></div>
+      <div style="margin-top: 24px; text-align: right;"><button class="btn btn-secondary" onclick="closeModal('legal-modal')">Close</button></div>
+    </div>
+  </div>
+
+  <button class="back-to-top-btn" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="app.js"></script>
+</body>
+</html>
