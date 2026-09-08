@@ -12,7 +12,30 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initBackToTop();
   initKeyboardShortcuts();
+  removeNetlifyWatermark();
 });
+
+function removeNetlifyWatermark() {
+  const clean = () => {
+    const selectors = [
+      '#netlify-feedback-drawer',
+      'iframe#netlify-drawer',
+      'div[data-netlify-drawer]',
+      '[class*="netlify-drawer"]',
+      '[id*="netlify-drawer"]',
+      '[class*="feedback-drawer"]',
+      '[data-testid*="netlify-drawer"]',
+      '.netlify-badge'
+    ];
+    selectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => el.remove());
+    });
+  };
+
+  clean();
+  const observer = new MutationObserver(clean);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+}
 
 /* ==========================================================================
    HEADER SCROLL DYNAMICS

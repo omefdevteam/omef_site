@@ -2536,6 +2536,43 @@ input, textarea, select {
   margin-top: 14px;
 }
 
+
+/* --- Subpage Hero Banner Styles --- */
+.page-hero {
+  padding-top: calc(var(--header-height) + 40px);
+  padding-bottom: 50px;
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, rgba(15, 21, 18, 0.6) 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  text-align: center;
+}
+
+.page-hero-title {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.page-hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  max-width: 760px;
+  margin: 0 auto 24px auto;
+  line-height: 1.7;
+}
+
+.breadcrumb-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+}
+
 .breadcrumb-nav a {
   color: var(--gold-400);
 }
@@ -2543,4 +2580,30 @@ input, textarea, select {
 .breadcrumb-nav a:hover {
   color: var(--gold-300);
   text-decoration: underline;
+}
+
+/* ==========================================================================
+   HIDE NETLIFY WATERMARK / FEEDBACK DRAWER
+   ========================================================================== */
+#netlify-feedback-drawer,
+iframe#netlify-drawer,
+div[data-netlify-drawer],
+[class*="netlify-drawer"],
+[id*="netlify-drawer"],
+[class*="feedback-drawer"],
+[data-testid*="netlify-drawer"],
+div[class*="netlify-badge"],
+.netlify-badge,
+a[href*="netlify.com"][class*="badge"],
+div:has(> a[href*="netlify.com"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  z-index: -9999 !important;
 }
