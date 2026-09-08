@@ -16,7 +16,7 @@
   --bg-card-hover: rgba(28, 42, 35, 0.9);
   --bg-glass: rgba(13, 19, 16, 0.85);
   --bg-glass-light: rgba(255, 255, 255, 0.04);
-  
+
   /* Gold Accents (From Medallion) */
   --gold-300: #fae49d;
   --gold-400: #eed378;
@@ -26,7 +26,7 @@
   --gold-gradient: linear-gradient(135deg, #fae49d 0%, #d4af37 50%, #a47d1c 100%);
   --gold-gradient-soft: linear-gradient(135deg, rgba(250, 228, 157, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
   --gold-glow: 0 0 25px rgba(212, 175, 55, 0.28);
-  
+
   /* Botanical Emeralds */
   --emerald-900: #0a1f16;
   --emerald-800: #0f2c20;
@@ -71,7 +71,7 @@
   --radius-lg: 20px;
   --radius-xl: 28px;
   --radius-pill: 9999px;
-  
+
   /* Shadows & Elevations */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -85,7 +85,9 @@
 }
 
 /* --- Resets & Global Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -105,7 +107,7 @@ body {
   color: var(--text-primary);
   line-height: 1.65;
   overflow-x: hidden;
-  background-image: 
+  background-image:
     radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
     radial-gradient(circle at 85% 60%, rgba(29, 82, 60, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 50% 90%, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
@@ -121,13 +123,16 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--bg-base);
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(212, 175, 55, 0.3);
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(212, 175, 55, 0.6);
 }
@@ -152,7 +157,9 @@ button {
   outline: none;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: var(--font-family-primary);
 }
 
@@ -773,8 +780,13 @@ input, textarea, select {
 }
 
 @keyframes rotateSlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ==========================================================================
@@ -1151,8 +1163,13 @@ input, textarea, select {
   margin-bottom: 20px;
 }
 
-.mv-card.mission .mv-icon { color: var(--gold-400); }
-.mv-card.vision .mv-icon { color: var(--emerald-400); }
+.mv-card.mission .mv-icon {
+  color: var(--gold-400);
+}
+
+.mv-card.vision .mv-icon {
+  color: var(--emerald-400);
+}
 
 .mv-title {
   font-size: 1.5rem;
@@ -2128,40 +2145,51 @@ input, textarea, select {
     gap: 48px;
     text-align: center;
   }
+
   .hero-content {
     margin: 0 auto;
   }
+
   .hero-quote-highlight {
     border-left: none;
     border-top: 2px solid var(--gold-500);
     border-bottom: 2px solid var(--gold-500);
     padding: 16px 0;
   }
+
   .hero-cta-group {
     justify-content: center;
   }
+
   .hero-trust-bar {
     justify-content: center;
   }
+
   .flagship-grid {
     grid-template-columns: 1fr;
   }
+
   .flagship-visual-side {
     border-left: none;
     border-top: 1px solid var(--border-subtle);
   }
+
   .approach-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .delivery-steps-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .footer-top-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
   .contact-grid {
     grid-template-columns: 1fr;
   }
+
   .contact-info-panel {
     border-right: none;
     border-bottom: 1px solid var(--border-subtle);
@@ -2175,33 +2203,43 @@ input, textarea, select {
   :root {
     --header-height: 72px;
   }
+
   .desktop-nav {
     display: none;
   }
+
   .mobile-toggle {
     display: flex;
   }
+
   .pillars-grid {
     grid-template-columns: 1fr;
   }
+
   .mission-vision-grid {
     grid-template-columns: 1fr;
   }
+
   .impact-labels-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .impact-dimensions-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .get-involved-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .stakeholders-grid {
     grid-template-columns: 1fr 1fr;
   }
+
   .form-row {
     grid-template-columns: 1fr;
   }
+
   .philosophy-grid {
     grid-template-columns: 1fr;
   }
@@ -2254,7 +2292,8 @@ input, textarea, select {
   }
 
   .nav-actions .btn {
-    display: none; /* Hide desktop Contact Us button to leave room for search + toggle */
+    display: none;
+    /* Hide desktop Contact Us button to leave room for search + toggle */
   }
 
   /* Hero Mobile Refinements */
@@ -2406,7 +2445,8 @@ input, textarea, select {
   }
 
   .stakeholders-grid {
-    grid-template-columns: 1fr 1fr; /* 2-column compact on mobile */
+    grid-template-columns: 1fr 1fr;
+    /* 2-column compact on mobile */
     gap: 10px;
   }
 
@@ -2442,7 +2482,8 @@ input, textarea, select {
   }
 
   .form-control {
-    font-size: 16px; /* Crucial: Prevents iOS Safari from auto-zooming! */
+    font-size: 16px;
+    /* Crucial: Prevents iOS Safari from auto-zooming! */
     padding: 12px 14px;
   }
 
@@ -2490,9 +2531,11 @@ input, textarea, select {
   .hero-headline {
     font-size: 1.85rem;
   }
+
   .brand-title {
     font-size: 0.85rem;
   }
+
   .stakeholders-grid {
     grid-template-columns: 1fr;
   }
