@@ -2611,6 +2611,725 @@ select {
 }
 
 /* ==========================================================================
+   PUBLIC GOVERNANCE & ORGANISATIONAL STRUCTURE (OMEF DOCX STYLES)
+   ========================================================================== */
+
+/* Subnav Bar for Quick Section Jumping */
+.gov-subnav-sticky {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 900;
+  background: rgba(10, 15, 12, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 10px 0;
+  transition: all var(--transition-normal);
+}
+
+.gov-subnav-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-600) transparent;
+  padding: 4px 0;
+}
+
+.gov-subnav-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.gov-subnav-container::-webkit-scrollbar-thumb {
+  background: var(--gold-600);
+  border-radius: 4px;
+}
+
+.gov-subnav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-hairline);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.gov-subnav-link:hover,
+.gov-subnav-link.active {
+  color: var(--gold-300);
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--gold-500);
+}
+
+/* Institutional Purpose Hero Banner */
+.gov-purpose-banner {
+  background: linear-gradient(135deg, rgba(21, 60, 44, 0.45) 0%, rgba(15, 21, 18, 0.85) 100%);
+  border: 1px solid var(--border-emerald);
+  border-radius: var(--radius-xl);
+  padding: 36px 40px;
+  margin-bottom: 48px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.gov-purpose-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gold-gradient);
+}
+
+.gov-purpose-content {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .gov-purpose-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 6 Governance Principles Grid */
+.gov-principles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.gov-principle-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.gov-principle-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background var(--transition-normal);
+}
+
+.gov-principle-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold-500);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), var(--gold-glow);
+}
+
+.gov-principle-card:hover::before {
+  background: var(--gold-gradient);
+}
+
+.gov-principle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.gov-principle-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-400);
+  font-size: 1.25rem;
+  transition: all var(--transition-normal);
+}
+
+.gov-principle-card:hover .gov-principle-icon {
+  background: var(--gold-gradient);
+  color: #0b100d;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+}
+
+.gov-principle-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gold-500);
+  background: rgba(212, 175, 55, 0.08);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.gov-principle-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.gov-principle-desc {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  flex-grow: 1;
+}
+
+/* Public Governance Architecture Chart / Tree */
+.gov-architecture-wrapper {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 48px 36px;
+  margin: 40px 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.gov-architecture-wrapper::after {
+  content: '';
+  position: absolute;
+  top: -150px;
+  right: -150px;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.gov-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Tree Nodes */
+.gov-node {
+  width: 100%;
+  max-width: 680px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  text-align: center;
+  position: relative;
+  transition: all var(--transition-normal);
+  z-index: 2;
+}
+
+.gov-node.node-board {
+  border-color: var(--gold-500);
+  background: linear-gradient(135deg, rgba(30, 42, 35, 0.9) 0%, rgba(20, 28, 24, 0.95) 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.gov-node.node-exec {
+  border-color: rgba(56, 165, 123, 0.5);
+  background: linear-gradient(135deg, rgba(16, 36, 28, 0.85) 0%, rgba(13, 22, 18, 0.95) 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.gov-node.node-hubs {
+  border-color: var(--border-subtle);
+  background: linear-gradient(135deg, rgba(22, 32, 27, 0.8) 0%, rgba(15, 21, 18, 0.9) 100%);
+  max-width: 860px;
+}
+
+.gov-node:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-400);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), var(--gold-glow);
+}
+
+.gov-node-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.node-board .gov-node-badge {
+  background: var(--gold-gradient-soft);
+  color: var(--gold-300);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.node-exec .gov-node-badge {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--emerald-accent);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.node-hubs .gov-node-badge {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.gov-node-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.gov-node-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Tree Connectors */
+.gov-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 48px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold-500) 0%, rgba(212, 175, 55, 0.3) 100%);
+  margin: 0 auto;
+}
+
+.gov-connector::after {
+  content: '▼';
+  position: absolute;
+  bottom: -4px;
+  font-size: 10px;
+  color: var(--gold-400);
+  line-height: 1;
+}
+
+/* Four Pillars Grid */
+.gov-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+@media (max-width: 1024px) {
+  .gov-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .gov-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gov-pillar-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  position: relative;
+  text-align: left;
+}
+
+.gov-pillar-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold-500);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.gov-pillar-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-400);
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.gov-pillar-card:hover .gov-pillar-icon {
+  background: var(--gold-gradient);
+  color: #0a0e0c;
+}
+
+.gov-pillar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.gov-pillar-desc {
+  font-size: 0.825rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Dual Column Layout (Board vs Chair / Leadership) */
+.gov-dual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.gov-role-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+}
+
+.gov-role-card:hover {
+  border-color: var(--gold-500);
+  background: var(--bg-card-hover);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+}
+
+.gov-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-bottom: 12px;
+}
+
+.gov-role-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.gov-role-intro {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.gov-role-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.gov-role-list li {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.gov-role-list li i {
+  color: var(--gold-400);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.gov-boundary-note {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: auto;
+}
+
+.gov-boundary-note strong {
+  color: var(--gold-300);
+}
+
+/* Programmes & Delivery Matrix */
+.gov-programmes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.gov-prog-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: all var(--transition-fast);
+}
+
+.gov-prog-item:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold-500);
+  transform: translateY(-2px);
+}
+
+.gov-prog-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--emerald-accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.gov-prog-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.gov-prog-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Multi-Stakeholder Partnerships Grid */
+.gov-partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.gov-partner-badge {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all var(--transition-fast);
+}
+
+.gov-partner-badge:hover {
+  background: rgba(212, 175, 55, 0.06);
+  border-color: var(--gold-500);
+  transform: translateY(-2px);
+}
+
+.gov-partner-badge i {
+  color: var(--gold-400);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.gov-partner-badge span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Accountability 6-Pillar Grid */
+.gov-accountability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.gov-acc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all var(--transition-fast);
+}
+
+.gov-acc-card:hover {
+  border-color: var(--gold-500);
+  background: var(--bg-card-hover);
+}
+
+.gov-acc-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-400);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.gov-acc-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.gov-acc-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Public Disclosure Boundaries Callout (Section 12 of Docx) */
+.gov-disclosure-box {
+  background: linear-gradient(135deg, rgba(28, 22, 16, 0.85) 0%, rgba(18, 14, 12, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  margin: 48px 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+}
+
+.gov-disclosure-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #d4af37 0%, #fae49d 50%, #d4af37 100%);
+}
+
+.gov-disclosure-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.gov-disclosure-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-400);
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.gov-disclosure-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.gov-disclosure-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+  list-style: none;
+}
+
+.gov-disclosure-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.885rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-hairline);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+}
+
+.gov-disclosure-list li i {
+  color: var(--gold-500);
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+/* Evolution Statement (Section 13) */
+.gov-evolution-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-emerald);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
    HIDE NETLIFY WATERMARK / FEEDBACK DRAWER
    ========================================================================== */
 #netlify-feedback-drawer,

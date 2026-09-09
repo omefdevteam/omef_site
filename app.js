@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSearch();
   initBackToTop();
   initKeyboardShortcuts();
+  initGovSubnav();
   removeNetlifyWatermark();
 });
 
@@ -384,7 +385,37 @@ const searchDatabase = [
   {
     title: 'Leadership, Governance & Charter',
     snippet: 'Public interest governance framework, decision rights, and approved Charter documents.',
-    link: 'about.html#governance'
+    link: 'governance.html'
+  },
+  {
+    title: 'Public Governance & Organisational Structure',
+    snippet: 'High-level public description of the governance architecture, Board oversight, and delivery of OMEF.',
+    link: 'governance.html'
+  },
+  {
+    title: 'Six Core Governance Principles',
+    snippet: 'Mission protection, responsible stewardship, clear accountability, partnership, integrity & transparency, long-term thinking.',
+    link: 'governance.html#principles'
+  },
+  {
+    title: 'Public Governance Architecture (Board, Executive & Pillars)',
+    snippet: 'Interactive hierarchical flow: Board of Directors, Executive Leadership, four functional delivery pillars, and local hubs.',
+    link: 'governance.html#architecture'
+  },
+  {
+    title: 'The Board of Directors & The Chair',
+    snippet: 'Strategic oversight, mission preservation, resource stewardship, and clear operational boundaries.',
+    link: 'governance.html#board'
+  },
+  {
+    title: 'Executive Leadership (President & Managing Director)',
+    snippet: 'Operational and technical execution, strategy implementation, institutional representation, and delivery coordination.',
+    link: 'governance.html#executive'
+  },
+  {
+    title: 'Public Disclosure Boundaries (What This Document Does Not Disclose)',
+    snippet: 'Transparent governance boundaries regarding confidential procedures, legal privilege, voting, and personnel records.',
+    link: 'governance.html#boundaries'
   },
   {
     title: 'Portfolio Overview & 5 Delivery Pathways',
@@ -544,4 +575,38 @@ function initKeyboardShortcuts() {
       }
     }
   });
+}
+
+/* ==========================================================================
+   GOVERNANCE SUBNAV SCROLLSPY
+   ========================================================================== */
+function initGovSubnav() {
+  const subnavLinks = document.querySelectorAll('.gov-subnav-link');
+  if (!subnavLinks.length) return;
+
+  const sections = Array.from(subnavLinks).map(link => {
+    const id = link.getAttribute('href')?.replace('#', '');
+    return id ? document.getElementById(id) : null;
+  }).filter(Boolean);
+
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        subnavLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${entry.target.id}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, {
+    rootMargin: '-15% 0px -70% 0px',
+    threshold: 0.1
+  });
+
+  sections.forEach(sec => observer.observe(sec));
 }
