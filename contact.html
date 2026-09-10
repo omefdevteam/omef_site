@@ -71,14 +71,14 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="search-trigger-btn" onclick="openModal('search-modal')" aria-label="Search Website">
+        <button type="button" class="search-trigger-btn" onclick="openModal('search-modal')" aria-label="Search Website">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <a href="contact.html" class="btn btn-primary btn-sm">
           <i class="fa-solid fa-paper-plane"></i>
           <span>Contact Us</span>
         </a>
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Mobile Menu">
+        <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Mobile Menu">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -96,7 +96,7 @@
           <span class="brand-subtitle" style="font-size: 0.65rem; color: var(--gold-400);">Foundation · OMEF</span>
         </div>
       </div>
-      <button class="drawer-close-btn" id="mobile-close-btn" aria-label="Close Menu">
+      <button type="button" class="drawer-close-btn" id="mobile-close-btn" aria-label="Close Menu">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -239,21 +239,21 @@
             <div class="involved-icon"><i class="fa-solid fa-handshake"></i></div>
             <h3 class="involved-title">Become a Partner</h3>
             <p class="involved-desc">Bring funding, research, delivery capability, education, technology, media or convening expertise.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Become a Partner</button>
+            <button type="button" class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Become a Partner</button>
           </div>
 
           <div class="involved-card">
             <div class="involved-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
             <h3 class="involved-title">Support a Programme</h3>
             <p class="involved-desc">Help a defined programme move from design toward measurable delivery.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Support a Programme</button>
+            <button type="button" class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Support a Programme</button>
           </div>
 
           <div class="involved-card">
             <div class="involved-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
             <h3 class="involved-title">Join Our Network</h3>
             <p class="involved-desc">Get thoughtful updates on programmes, events and learning — nothing more than that.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('General enquiry')">Join Our Network</button>
+            <button type="button" class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('General enquiry')">Join Our Network</button>
           </div>
 
           <div class="involved-card">
@@ -277,7 +277,7 @@
               <strong style="color: var(--gold-400);">Editorial note:</strong> Before donation functionality goes live: confirm legal entity and receipting language, publish terms and privacy information, define restricted vs. unrestricted fund treatment, set the acknowledgement and reporting workflow, and complete payment security and accessibility checks.
             </div>
             <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-sm" onclick="setContactInquiry('Funding and partnerships')"><i class="fa-solid fa-comments"></i> Discuss Programme Support</button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="setContactInquiry('Funding and partnerships')"><i class="fa-solid fa-comments"></i> Discuss Programme Support</button>
               <a href="partners.html#collaborate" class="btn btn-outline-gold btn-sm"><i class="fa-solid fa-handshake"></i> Partnership Enquiries</a>
             </div>
           </div>
@@ -498,7 +498,7 @@
   <!-- MODALS -->
   <div class="modal-overlay" id="search-modal" aria-hidden="true">
     <div class="modal-dialog search-modal-dialog">
-      <button class="modal-close-btn" onclick="closeModal('search-modal')"><i class="fa-solid fa-xmark"></i></button>
+      <button type="button" class="modal-close-btn" onclick="closeModal('search-modal')"><i class="fa-solid fa-xmark"></i></button>
       <div class="search-input-wrapper">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="site-search-input" class="search-input" placeholder="Search programmes, Kumasi 2027, partners, beliefs...">
@@ -507,7 +507,7 @@
     </div>
   </div>
 
-  <button class="back-to-top-btn" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
+  <button type="button" class="back-to-top-btn" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
   <script src="app.js"></script>
 </body>
 </html>
