@@ -127,5 +127,5 @@ jobs:
       - name: Lychee
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --no-progress --exclude-all-private --exclude-path ci --accept 200,203,206,429 "*.html"
+          args: --no-progress --root-dir . --exclude-all-private --exclude-path ci --accept 200,203,206,429 "*.html"
           fail: true
