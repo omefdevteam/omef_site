@@ -1,0 +1,131 @@
+name: Vérifications de la pull request
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ------------------------------------------------------------------
+  # Bloquant. Vérifie ce qui casse réellement ce site : formulaires
+  # débranchés, champs sans name, liens internes morts, pages manquantes.
+  # ------------------------------------------------------------------
+  integrite:
+    name: Intégrité du site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Vérifications propres au site
+        run: node scripts/check-site-integrity.mjs
+
+  # ------------------------------------------------------------------
+  # Bloquant. Qualité du code : HTML malformé, erreurs JS, CSS invalide.
+  # ------------------------------------------------------------------
+  lint:
+    name: Qualité du code
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: ci/package-lock.json
+      - name: Installer les outils de vérification
+        working-directory: ci
+        run: npm ci
+
+      - name: HTML — structure et accessibilité de base
+        run: ./ci/node_modules/.bin/htmlhint --config ci/.htmlhintrc "*.html"
+
+      - name: JavaScript — erreurs et motifs dangereux
+        run: ./ci/node_modules/.bin/eslint --config ci/eslint.config.mjs "*.js"
+
+      - name: CSS — validité
+        run: ./ci/node_modules/.bin/stylelint --config ci/.stylelintrc.json "*.css"
+
+  # ------------------------------------------------------------------
+  # Bloquant. Aucun secret ne doit entrer dans un dépôt public.
+  # ------------------------------------------------------------------
+  secrets:
+    name: Fuite de secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: TruffleHog — analyse du dépôt et de son historique
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ''
+          head: HEAD
+          extra_args: --results=verified,unknown
+
+  # ------------------------------------------------------------------
+  # Bloquant. Le poids des pages est ce qui dégrade l'expérience mobile
+  # sur ce site (images non optimisées). Plafond volontairement large :
+  # il attrape les dérapages, pas les variations normales.
+  # ------------------------------------------------------------------
+  poids:
+    name: Poids des ressources
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Aucun fichier publié au-delà de 2,5 Mo
+        run: |
+          LIMITE=2621440
+          DEPASSEMENT=0
+          while IFS= read -r f; do
+            TAILLE=$(stat -c%s "$f")
+            if [ "$TAILLE" -gt "$LIMITE" ]; then
+              echo "::error file=$f::$f pèse $((TAILLE / 1024)) Ko, au-delà de la limite de $((LIMITE / 1024)) Ko."
+              DEPASSEMENT=1
+            fi
+          done < <(find . -type f -not -path './.git/*' -not -path './ci/node_modules/*')
+          exit $DEPASSEMENT
+
+  # ------------------------------------------------------------------
+  # Informatif. Performance, accessibilité, SEO, bonnes pratiques.
+  # Ne bloque pas : le site part d'une base perfectible et il ne faut
+  # pas que chaque PR échoue pour une dette antérieure.
+  # ------------------------------------------------------------------
+  lighthouse:
+    name: Lighthouse (informatif)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./ci/lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+  # ------------------------------------------------------------------
+  # Informatif. Liens externes : souvent en échec pour des raisons
+  # indépendantes du site (limitation de débit, site tiers hors ligne).
+  # ------------------------------------------------------------------
+  liens-externes:
+    name: Liens externes (informatif)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --exclude-all-private --exclude-path ci --accept 200,203,206,429 "*.html"
+          fail: true
