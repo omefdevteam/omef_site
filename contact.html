@@ -71,14 +71,14 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="search-trigger-btn" onclick="openModal('search-modal')" aria-label="Search Website">
+        <button type="button" class="search-trigger-btn" onclick="openModal('search-modal')" aria-label="Search Website">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
         <a href="contact.html" class="btn btn-primary btn-sm">
           <i class="fa-solid fa-paper-plane"></i>
           <span>Contact Us</span>
         </a>
-        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Mobile Menu">
+        <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Mobile Menu">
           <i class="fa-solid fa-bars"></i>
         </button>
       </div>
@@ -96,7 +96,7 @@
           <span class="brand-subtitle" style="font-size: 0.65rem; color: var(--gold-400);">Foundation · OMEF</span>
         </div>
       </div>
-      <button class="drawer-close-btn" id="mobile-close-btn" aria-label="Close Menu">
+      <button type="button" class="drawer-close-btn" id="mobile-close-btn" aria-label="Close Menu">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -194,7 +194,7 @@
       </a>
       <div class="drawer-contact-mini">
         <span><i class="fa-solid fa-location-dot"></i> Kumasi, Ghana & International Hubs</span>
-        <span><i class="fa-solid fa-envelope"></i> enquiries@ourmotherearth.org</span>
+        <span><i class="fa-solid fa-envelope"></i> enquiries@ourmotherearthfoundation.org</span>
       </div>
     </div>
   </aside>
@@ -239,21 +239,21 @@
             <div class="involved-icon"><i class="fa-solid fa-handshake"></i></div>
             <h3 class="involved-title">Become a Partner</h3>
             <p class="involved-desc">Bring funding, research, delivery capability, education, technology, media or convening expertise.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Become a Partner</button>
+            <button type="button" class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Become a Partner</button>
           </div>
 
           <div class="involved-card">
             <div class="involved-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
             <h3 class="involved-title">Support a Programme</h3>
             <p class="involved-desc">Help a defined programme move from design toward measurable delivery.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Support a Programme</button>
+            <button type="button" class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('Funding and partnerships')">Support a Programme</button>
           </div>
 
           <div class="involved-card">
             <div class="involved-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
             <h3 class="involved-title">Join Our Network</h3>
             <p class="involved-desc">Get thoughtful updates on programmes, events and learning — nothing more than that.</p>
-            <button class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('General enquiry')">Join Our Network</button>
+            <button type="button" class="btn btn-sm btn-outline-gold" onclick="setContactInquiry('General enquiry')">Join Our Network</button>
           </div>
 
           <div class="involved-card">
@@ -277,7 +277,7 @@
               <strong style="color: var(--gold-400);">Editorial note:</strong> Before donation functionality goes live: confirm legal entity and receipting language, publish terms and privacy information, define restricted vs. unrestricted fund treatment, set the acknowledgement and reporting workflow, and complete payment security and accessibility checks.
             </div>
             <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-              <button class="btn btn-primary btn-sm" onclick="setContactInquiry('Funding and partnerships')"><i class="fa-solid fa-comments"></i> Discuss Programme Support</button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="setContactInquiry('Funding and partnerships')"><i class="fa-solid fa-comments"></i> Discuss Programme Support</button>
               <a href="partners.html#collaborate" class="btn btn-outline-gold btn-sm"><i class="fa-solid fa-handshake"></i> Partnership Enquiries</a>
             </div>
           </div>
@@ -310,7 +310,7 @@
                 </div>
                 <div style="display: flex; align-items: center; gap: 14px;">
                   <i class="fa-solid fa-envelope" style="color: var(--gold-400); width: 22px;"></i>
-                  <span style="font-size: 0.95rem; color: var(--text-primary);">enquiries@ourmotherearth.org</span>
+                  <span style="font-size: 0.95rem; color: var(--text-primary);">enquiries@ourmotherearthfoundation.org</span>
                 </div>
                 <div style="display: flex; align-items: center; gap: 14px;">
                   <i class="fa-solid fa-shield-halved" style="color: var(--gold-400); width: 22px;"></i>
@@ -324,7 +324,7 @@
                 Alternative Contact Route
               </span>
               <span style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; display: block;">
-                If you encounter any issues with the enquiry form, please email us directly at <a href="mailto:enquiries@ourmotherearth.org" style="color: var(--gold-500); font-weight: 600; text-decoration: underline;">enquiries@ourmotherearth.org</a>.
+                If you encounter any issues with the enquiry form, please email us directly at <a href="mailto:enquiries@ourmotherearthfoundation.org" style="color: var(--gold-500); font-weight: 600; text-decoration: underline;">enquiries@ourmotherearthfoundation.org</a>.
               </span>
             </div>
           </div>
@@ -334,11 +334,14 @@
 
             <div id="contact-feedback-area"></div>
 
-            <form id="contact-form" novalidate>
+            <form id="contact-form" name="contact" method="POST" action="/contact.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+
+              <input type="hidden" name="form-name" value="contact">
+              <p style="display:none;"><label>Leave this field empty: <input name="bot-field"></label></p>
 
               <div class="form-group">
                 <label for="contact-inquiry-type" class="form-label">Select Inquiry Type *</label>
-                <select id="contact-inquiry-type" class="form-control" required>
+                <select id="contact-inquiry-type" name="inquiry_type" class="form-control" required>
                   <option value="" disabled selected>-- Choose Enquiry Track --</option>
                   <option value="Funding and partnerships">Funding and partnerships</option>
                   <option value="Programmes and methodologies">Programmes and methodologies</option>
@@ -353,28 +356,28 @@
               <div class="form-row">
                 <div class="form-group">
                   <label for="contact-name" class="form-label">Full Name *</label>
-                  <input type="text" id="contact-name" class="form-control" placeholder="Your name" required>
+                  <input type="text" id="contact-name" name="name" class="form-control" placeholder="Your name" required>
                 </div>
                 <div class="form-group">
                   <label for="contact-email" class="form-label">Email Address *</label>
-                  <input type="email" id="contact-email" class="form-control" placeholder="name@organisation.org" required>
+                  <input type="email" id="contact-email" name="email" class="form-control" placeholder="name@organisation.org" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="contact-org" class="form-label">Organisation / Entity</label>
-                  <input type="text" id="contact-org" class="form-control" placeholder="Government, foundation, company, university">
+                  <input type="text" id="contact-org" name="organisation" class="form-control" placeholder="Government, foundation, company, university">
                 </div>
                 <div class="form-group">
                   <label for="contact-role" class="form-label">Your Role / Capacity</label>
-                  <input type="text" id="contact-role" class="form-control" placeholder="Director, Researcher, Community Leader">
+                  <input type="text" id="contact-role" name="role" class="form-control" placeholder="Director, Researcher, Community Leader">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="contact-message" class="form-label">Message or Collaboration Scope *</label>
-                <textarea id="contact-message" class="form-control" rows="5" placeholder="Please describe the nature of your interest, questions, or proposed collaboration..." required></textarea>
+                <textarea id="contact-message" name="message" class="form-control" rows="5" placeholder="Please describe the nature of your interest, questions, or proposed collaboration..." required></textarea>
               </div>
 
               <!-- Optional Affirmative Email Updates Consent -->
@@ -495,7 +498,7 @@
   <!-- MODALS -->
   <div class="modal-overlay" id="search-modal" aria-hidden="true">
     <div class="modal-dialog search-modal-dialog">
-      <button class="modal-close-btn" onclick="closeModal('search-modal')"><i class="fa-solid fa-xmark"></i></button>
+      <button type="button" class="modal-close-btn" onclick="closeModal('search-modal')"><i class="fa-solid fa-xmark"></i></button>
       <div class="search-input-wrapper">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="site-search-input" class="search-input" placeholder="Search programmes, Kumasi 2027, partners, beliefs...">
@@ -504,7 +507,7 @@
     </div>
   </div>
 
-  <button class="back-to-top-btn" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
+  <button type="button" class="back-to-top-btn" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,5 @@
+ci/node_modules/
+node_modules/
+.netlify/
+.DS_Store
+.lighthouseci/

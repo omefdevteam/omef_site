@@ -3414,32 +3414,6 @@ select {
 }
 
 /* ==========================================================================
-   HIDE NETLIFY WATERMARK / FEEDBACK DRAWER
-   ========================================================================== */
-#netlify-feedback-drawer,
-iframe#netlify-drawer,
-div[data-netlify-drawer],
-[class*="netlify-drawer"],
-[id*="netlify-drawer"],
-[class*="feedback-drawer"],
-[data-testid*="netlify-drawer"],
-div[class*="netlify-badge"],
-.netlify-badge,
-a[href*="netlify.com"][class*="badge"],
-div:has(> a[href*="netlify.com"]) {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  clip-path: inset(100%) !important;
-  clip: rect(0 0 0 0) !important;
-  width: 0 !important;
-  height: 0 !important;
-  position: absolute !important;
-  z-index: -9999 !important;
-}
-
-/* ==========================================================================
    DEDICATED LEGAL & POLICY PAGES LAYOUT
    ========================================================================== */
 .legal-layout-grid {

@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initKeyboardShortcuts();
   initGovSubnav();
   checkCharterHash();
-  removeNetlifyWatermark();
 });
 
 function checkCharterHash() {
@@ -25,28 +24,6 @@ function checkCharterHash() {
       }
     }, 250);
   }
-}
-
-function removeNetlifyWatermark() {
-  const clean = () => {
-    const selectors = [
-      '#netlify-feedback-drawer',
-      'iframe#netlify-drawer',
-      'div[data-netlify-drawer]',
-      '[class*="netlify-drawer"]',
-      '[id*="netlify-drawer"]',
-      '[class*="feedback-drawer"]',
-      '[data-testid*="netlify-drawer"]',
-      '.netlify-badge'
-    ];
-    selectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => el.remove());
-    });
-  };
-
-  clean();
-  const observer = new MutationObserver(clean);
-  observer.observe(document.documentElement, { childList: true, subtree: true });
 }
 
 /* ==========================================================================
@@ -301,14 +278,7 @@ function initContactForm() {
       submitBtn.disabled = true;
     }
 
-    setTimeout(() => {
-      if (submitBtn) {
-        submitBtn.innerHTML = originalBtnText;
-        submitBtn.disabled = false;
-      }
-      form.reset();
-      if (feedbackArea) {
-        feedbackArea.innerHTML = `
+    const successHTML = `
           <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-sm); background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.35); color: #d1fae5; display: flex; gap: 14px; align-items: flex-start; line-height: 1.6;">
             <i class="fa-solid fa-circle-check" style="font-size: 1.3rem; color: var(--emerald-400); flex-shrink: 0; margin-top: 2px;"></i>
             <div>
@@ -317,9 +287,47 @@ function initContactForm() {
             </div>
           </div>
         `;
-        feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    const errorHTML = `
+          <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-sm); background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(220, 38, 38, 0.35); color: #fee2e2; display: flex; gap: 14px; align-items: flex-start; line-height: 1.6;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.3rem; color: #fca5a5; flex-shrink: 0; margin-top: 2px;"></i>
+            <div>
+              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Your enquiry could not be sent.</strong>
+              Something went wrong on our side. Please try again in a moment, or contact us using the email address listed on this page.
+            </div>
+          </div>
+        `;
+
+    const restoreButton = () => {
+      if (submitBtn) {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
       }
-    }, 800);
+    };
+
+    const showFeedback = (html) => {
+      if (!feedbackArea) return;
+      feedbackArea.innerHTML = html;
+      feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    };
+
+    // Real submission to Netlify Forms (form-encoded POST to the page itself).
+    fetch(form.getAttribute('action') || window.location.pathname, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+      .then((response) => {
+        restoreButton();
+        if (!response.ok) throw new Error('Submission failed with status ' + response.status);
+        form.reset();
+        showFeedback(successHTML);
+      })
+      .catch((err) => {
+        console.error('Contact form submission failed:', err);
+        restoreButton();
+        showFeedback(errorHTML);
+      });
   });
 }
 
