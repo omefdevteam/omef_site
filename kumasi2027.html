@@ -393,26 +393,28 @@
               </div>
             </div>
 
-            <form id="k-page-form" onsubmit="event.preventDefault(); submitKumasiPageForm();">
+            <form id="k-page-form" name="kumasi2027" method="POST" action="/kumasi2027.html" data-netlify="true" netlify-honeypot="bot-field" onsubmit="event.preventDefault(); submitKumasiPageForm();">
+              <input type="hidden" name="form-name" value="kumasi2027">
+              <p style="display:none;"><label>Leave this field empty: <input name="bot-field"></label></p>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="kp-name">Full Name *</label>
-                  <input type="text" id="kp-name" class="form-control" placeholder="Your name" required>
+                  <input type="text" id="kp-name" name="name" class="form-control" placeholder="Your name" required>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="kp-email">Email Address *</label>
-                  <input type="email" id="kp-email" class="form-control" placeholder="name@organisation.org" required>
+                  <input type="email" id="kp-email" name="email" class="form-control" placeholder="name@organisation.org" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="kp-org">Organisation / Affiliation</label>
-                  <input type="text" id="kp-org" class="form-control" placeholder="Government, institution, company, community">
+                  <input type="text" id="kp-org" name="organisation" class="form-control" placeholder="Government, institution, company, community">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="kp-track">Participation Track *</label>
-                  <select id="kp-track" class="form-control" required>
+                  <select id="kp-track" name="participation_track" class="form-control" required>
                     <option value="attendee">Register Interest (Delegate)</option>
                     <option value="speaker">Propose a Speaker</option>
                     <option value="partner">Explore Event Partnership</option>
@@ -424,7 +426,7 @@
 
               <div class="form-group">
                 <label class="form-label" for="kp-notes">How You Wish to Contribute</label>
-                <textarea id="kp-notes" class="form-control" rows="4" placeholder="Tell us a bit about your work, theme interest, or proposed contribution..."></textarea>
+                <textarea id="kp-notes" name="contribution" class="form-control" rows="4" placeholder="Tell us a bit about your work, theme interest, or proposed contribution..."></textarea>
               </div>
 
               <!-- Optional Affirmative Email Updates Consent -->
@@ -558,10 +560,43 @@
   <script src="app.js"></script>
   <script>
     function submitKumasiPageForm() {
+      const form = document.getElementById('k-page-form');
       const feedback = document.getElementById('k-page-feedback');
-      feedback.style.display = 'flex';
-      document.getElementById('k-page-form').reset();
-      feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+
+      if (!form.reportValidity()) return;
+
+      if (submitBtn) {
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+        submitBtn.disabled = true;
+      }
+
+      const restore = () => {
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+      };
+
+      // Real submission to Netlify Forms (form-encoded POST to the page itself).
+      fetch(form.getAttribute('action') || window.location.pathname, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      })
+        .then((response) => {
+          restore();
+          if (!response.ok) throw new Error('Submission failed with status ' + response.status);
+          form.reset();
+          feedback.style.display = 'flex';
+          feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        })
+        .catch((err) => {
+          console.error('Kumasi 2027 form submission failed:', err);
+          restore();
+          alert('Your registration of interest could not be submitted. Please try again in a moment.');
+        });
     }
   </script>
 </body>

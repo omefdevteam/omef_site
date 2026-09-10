@@ -334,11 +334,14 @@
 
             <div id="contact-feedback-area"></div>
 
-            <form id="contact-form" novalidate>
+            <form id="contact-form" name="contact" method="POST" action="/contact.html" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+
+              <input type="hidden" name="form-name" value="contact">
+              <p style="display:none;"><label>Leave this field empty: <input name="bot-field"></label></p>
 
               <div class="form-group">
                 <label for="contact-inquiry-type" class="form-label">Select Inquiry Type *</label>
-                <select id="contact-inquiry-type" class="form-control" required>
+                <select id="contact-inquiry-type" name="inquiry_type" class="form-control" required>
                   <option value="" disabled selected>-- Choose Enquiry Track --</option>
                   <option value="Funding and partnerships">Funding and partnerships</option>
                   <option value="Programmes and methodologies">Programmes and methodologies</option>
@@ -353,28 +356,28 @@
               <div class="form-row">
                 <div class="form-group">
                   <label for="contact-name" class="form-label">Full Name *</label>
-                  <input type="text" id="contact-name" class="form-control" placeholder="Your name" required>
+                  <input type="text" id="contact-name" name="name" class="form-control" placeholder="Your name" required>
                 </div>
                 <div class="form-group">
                   <label for="contact-email" class="form-label">Email Address *</label>
-                  <input type="email" id="contact-email" class="form-control" placeholder="name@organisation.org" required>
+                  <input type="email" id="contact-email" name="email" class="form-control" placeholder="name@organisation.org" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
                   <label for="contact-org" class="form-label">Organisation / Entity</label>
-                  <input type="text" id="contact-org" class="form-control" placeholder="Government, foundation, company, university">
+                  <input type="text" id="contact-org" name="organisation" class="form-control" placeholder="Government, foundation, company, university">
                 </div>
                 <div class="form-group">
                   <label for="contact-role" class="form-label">Your Role / Capacity</label>
-                  <input type="text" id="contact-role" class="form-control" placeholder="Director, Researcher, Community Leader">
+                  <input type="text" id="contact-role" name="role" class="form-control" placeholder="Director, Researcher, Community Leader">
                 </div>
               </div>
 
               <div class="form-group">
                 <label for="contact-message" class="form-label">Message or Collaboration Scope *</label>
-                <textarea id="contact-message" class="form-control" rows="5" placeholder="Please describe the nature of your interest, questions, or proposed collaboration..." required></textarea>
+                <textarea id="contact-message" name="message" class="form-control" rows="5" placeholder="Please describe the nature of your interest, questions, or proposed collaboration..." required></textarea>
               </div>
 
               <!-- Optional Affirmative Email Updates Consent -->
