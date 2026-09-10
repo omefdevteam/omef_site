@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy & Data Protection Notice | Our Mother Earth Foundation (OMEF)</title>
+  <meta name="description" content="Official Privacy & Data Protection Notice of Our Mother Earth Foundation (OMEF). Explaining how we collect, use, protect, and process personal data in accordance with UK GDPR and applicable laws.">
+
+  <link rel="icon" type="image/png" href="omef_Logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SITE HEADER -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-link" aria-label="Our Mother Earth Foundation Home">
+        <img src="omef_Logo.png" alt="OMEF Logo" class="brand-logo-img">
+        <div class="brand-text">
+          <span class="brand-title">Our Mother Earth</span>
+          <span class="brand-subtitle">Foundation · OMEF</span>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">
+              <span>About</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </a>
+            <div class="nav-dropdown">
+              <a href="about.html#story" class="dropdown-link"><i class="fa-solid fa-seedling"></i> The Story of Ourselves</a>
+              <a href="about.html#mission-vision" class="dropdown-link"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a>
+              <a href="about.html#beliefs" class="dropdown-link"><i class="fa-solid fa-hand-holding-heart"></i> O-M-E-F Core Beliefs</a>
+              <a href="about.html#approach" class="dropdown-link"><i class="fa-solid fa-compass"></i> Our 5 Approaches</a>
+              <a href="governance.html" class="dropdown-link"><i class="fa-solid fa-shield-halved"></i> Governance & Structure</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="our-work.html" class="nav-link">
+              <span>Our Work</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </a>
+            <div class="nav-dropdown">
+              <a href="our-work.html#portfolio" class="dropdown-link"><i class="fa-solid fa-layer-group"></i> Portfolio Overview</a>
+              <a href="our-work.html#pathways" class="dropdown-link"><i class="fa-solid fa-network-wired"></i> 5 Delivery Pathways</a>
+              <a href="our-work.html#delivery" class="dropdown-link"><i class="fa-solid fa-route"></i> 5-Phase Delivery Discipline</a>
+              <a href="our-work.html#tano" class="dropdown-link"><i class="fa-solid fa-water"></i> Tano River: A Vision</a>
+              <a href="our-work.html#asanteman" class="dropdown-link"><i class="fa-solid fa-microchip"></i> Asanteman Digital Future</a>
+              <a href="our-work.html#events" class="dropdown-link"><i class="fa-solid fa-tent"></i> COP & Refugees Pavilion</a>
+            </div>
+          </li>
+          <li class="nav-item"><a href="kumasi2027.html" class="nav-link">Kumasi 2027</a></li>
+          <li class="nav-item"><a href="impact.html" class="nav-link">Impact</a></li>
+          <li class="nav-item"><a href="partners.html" class="nav-link">Partners</a></li>
+          <li class="nav-item">
+            <a href="results.html" class="nav-link">
+              <span>Results & Media</span>
+              <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </a>
+            <div class="nav-dropdown">
+              <a href="results.html#publications" class="dropdown-link"><i class="fa-solid fa-book-open"></i> Publications & Case Studies</a>
+              <a href="results.html#methodologies" class="dropdown-link"><i class="fa-solid fa-diagram-project"></i> Methodology Frameworks</a>
+              <a href="results.html#news" class="dropdown-link"><i class="fa-solid fa-newspaper"></i> News & Media Centre</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="search-trigger-btn" onclick="openModal('search-modal')" aria-label="Search Website">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Contact Us</span>
+        </a>
+        <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="mobile-drawer" id="mobile-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <div class="brand-link">
+        <img src="omef_Logo.png" alt="OMEF" class="brand-logo-img" style="width: 40px; height: 40px;">
+        <div class="brand-text">
+          <span class="brand-title" style="font-size: 0.95rem;">Our Mother Earth</span>
+          <span class="brand-subtitle" style="font-size: 0.65rem; color: var(--gold-400);">Foundation · OMEF</span>
+        </div>
+      </div>
+      <button class="drawer-close-btn" id="mobile-close-btn" aria-label="Close Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="mobile-drawer-body">
+      <div class="drawer-section-label">Navigation Menu</div>
+      <ul class="mobile-drawer-links">
+        <li>
+          <a href="index.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-house"></i></span><span>Home</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-seedling"></i></span><span>About Us</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="governance.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-shield-halved"></i></span><span>Governance & Structure</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="our-work.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-briefcase"></i></span><span>Our Work & Flagships</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="kumasi2027.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-calendar-days"></i></span><span>Africa Climate Week 2027</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="impact.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-chart-line"></i></span><span>Impact & Transparency</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="partners.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-handshake"></i></span><span>Partners</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="results.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-book-open"></i></span><span>Results & Media</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+        <li>
+          <a href="contact.html" class="mobile-nav-item">
+            <span class="drawer-link-content"><span class="drawer-icon"><i class="fa-solid fa-paper-plane"></i></span><span>Contact & Get Involved</span></span>
+            <i class="fa-solid fa-chevron-right drawer-chevron"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mobile-drawer-footer">
+      <a href="contact.html" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+        <i class="fa-solid fa-envelope"></i> Send an Enquiry
+      </a>
+    </div>
+  </aside>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-tag"><i class="fa-solid fa-shield-halved"></i> Data Protection & Privacy</span>
+      <h1 class="page-hero-title">Privacy & Data Protection Notice</h1>
+      <p class="page-hero-subtitle" style="max-width: 820px; margin-left: auto; margin-right: auto;">
+        Our Mother Earth Foundation ("OMEF", "we", "us" or "our") respects your privacy and is committed to protecting personal data.
+      </p>
+      <div class="breadcrumb-nav" style="justify-content: center; margin-top: 24px;">
+        <a href="index.html">Home</a>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i>
+        <span>Privacy & Data Protection</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="section-padding">
+    <div class="container">
+      <div class="legal-layout-grid">
+
+        <!-- Legal Article Body -->
+        <article class="legal-article">
+          <div class="legal-doc-header">
+            <h2 class="legal-doc-title">Privacy & Data Protection Notice</h2>
+            <div class="legal-doc-meta">
+              <span><strong>Organisation:</strong> Our Mother Earth Foundation (OMEF)</span>
+              <span><strong>Effective Date:</strong> 1st September 2026</span>
+              <span><strong>Scope:</strong> Public Website & International Activities</span>
+            </div>
+          </div>
+
+          <div class="legal-body-text">
+            <p>
+              This Privacy & Data Protection Notice explains how we collect, use, disclose and protect personal data when you visit our website, contact us, participate in our activities, engage with our programmes, subscribe to communications or otherwise interact with OMEF.
+            </p>
+            <p>
+              We seek to handle personal data responsibly and in accordance with applicable data protection and privacy laws, including, where applicable, the UK General Data Protection Regulation ("UK GDPR"), the Data Protection Act 2018 and the Privacy and Electronic Communications Regulations 2003 ("PECR").
+            </p>
+          </div>
+
+          <!-- Section 1 -->
+          <section id="who-we-are" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">1.</span> Who we are</h3>
+            <div class="legal-body-text">
+              <p>
+                Our Mother Earth Foundation (OMEF) is an independent non-profit foundation working internationally in the fields of environmental protection, climate action, sustainable development, community resilience and related areas.
+              </p>
+              <div class="legal-callout">
+                <p><strong>For general enquiries:</strong> Email: <a href="mailto:enquiries@omef.com" style="color: var(--gold-400);">enquiries@omef.com</a></p>
+                <p style="margin-top: 8px;"><strong>For privacy and data protection enquiries:</strong> Email: <a href="mailto:privacy@omef.com" style="color: var(--gold-400);">privacy@omef.com</a></p>
+              </div>
+              <p>
+                Where applicable law requires OMEF to appoint a Data Protection Officer, UK representative or other designated privacy contact, the relevant details will be provided in this Privacy & Data Protection Notice.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 2 -->
+          <section id="data-we-collect" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">2.</span> Personal data we may collect</h3>
+            <div class="legal-body-text">
+              <p>Depending on how you interact with us, we may collect:</p>
+              <ul class="legal-list">
+                <li>your name;</li>
+                <li>email address;</li>
+                <li>telephone number;</li>
+                <li>organisation and professional information;</li>
+                <li>country or general location;</li>
+                <li>information contained in enquiries or correspondence;</li>
+                <li>information provided when registering for an event, programme or activity;</li>
+                <li>information relating to partnerships or professional engagement;</li>
+                <li>preferences regarding communications;</li>
+                <li>technical information about your device or browser;</li>
+                <li>information concerning your use of our website; and</li>
+                <li>other information that you voluntarily provide to us.</li>
+              </ul>
+              <div class="legal-callout emerald">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">Special Category Data:</strong>
+                We do not generally seek to collect special category personal data through this website. Please do not submit sensitive personal information unless it is specifically requested through an appropriate channel.
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 3 -->
+          <section id="how-we-collect" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">3.</span> How we collect personal data</h3>
+            <div class="legal-body-text">
+              <p>We may collect personal data:</p>
+              <ul class="legal-list">
+                <li>directly from you;</li>
+                <li>when you contact us;</li>
+                <li>when you complete an online form;</li>
+                <li>when you subscribe to communications;</li>
+                <li>when you register for an event or activity;</li>
+                <li>when you communicate with us as a partner, participant or stakeholder;</li>
+                <li>through information generated by your use of our website; or</li>
+                <li>from publicly available sources where this is lawful and appropriate.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Section 4 -->
+          <section id="how-we-use" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">4.</span> How we use personal data</h3>
+            <div class="legal-body-text">
+              <p>We may use personal data to:</p>
+              <ul class="legal-list">
+                <li>respond to enquiries;</li>
+                <li>communicate with you;</li>
+                <li>administer programmes, events and activities;</li>
+                <li>manage relationships with partners and stakeholders;</li>
+                <li>provide information you have requested;</li>
+                <li>send communications where you have requested or consented to receive them;</li>
+                <li>maintain appropriate organisational records;</li>
+                <li>improve and secure our website and digital services;</li>
+                <li>understand how our website is used;</li>
+                <li>prevent misuse, fraud or unlawful activity;</li>
+                <li>comply with legal and regulatory obligations; and</li>
+                <li>establish, exercise or defend legal rights.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Section 5 -->
+          <section id="lawful-basis" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">5.</span> Lawful basis for processing</h3>
+            <div class="legal-body-text">
+              <p>Where UK GDPR applies, we will process personal data on an appropriate lawful basis. Depending on the circumstances, this may include:</p>
+              <ul class="legal-list">
+                <li><strong>Your consent;</strong></li>
+                <li><strong>Performance of a contract</strong> or steps taken at your request;</li>
+                <li><strong>Compliance with a legal obligation;</strong></li>
+                <li><strong>Protection of vital interests;</strong> or</li>
+                <li><strong>Our legitimate interests,</strong> provided that these do not unfairly override your rights and interests.</li>
+              </ul>
+              <p>
+                Where we rely on legitimate interests, these may include administering and developing our activities, maintaining relationships with stakeholders and partners, responding to enquiries, maintaining website security, preventing misuse, improving our services and communicating with individuals where permitted by law.
+              </p>
+              <p>
+                Where we rely on consent, you may withdraw your consent at any time.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 6 -->
+          <section id="communications" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">6.</span> Communications</h3>
+            <div class="legal-body-text">
+              <p>
+                If you choose to receive communications from OMEF, we will use your contact details for the purposes described when you subscribe or otherwise provide your information.
+              </p>
+              <p>
+                Where applicable law requires consent for electronic marketing communications, we will obtain and record appropriate consent.
+              </p>
+              <p>
+                You may unsubscribe from non-essential communications at any time by using the relevant unsubscribe mechanism or contacting us.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 7 -->
+          <section id="sharing" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">7.</span> Sharing personal data</h3>
+            <div class="legal-body-text">
+              <p><strong>We do not sell personal data.</strong></p>
+              <p>We may share personal data where reasonably necessary with:</p>
+              <ul class="legal-list">
+                <li>service providers supporting our website or digital infrastructure;</li>
+                <li>communications and mailing-service providers;</li>
+                <li>event or programme service providers;</li>
+                <li>professional advisers;</li>
+                <li>technology and security providers; and</li>
+                <li>public authorities or other persons where disclosure is required or permitted by law.</li>
+              </ul>
+              <p>
+                Where appropriate, we seek to ensure that organisations processing personal data on our behalf provide appropriate confidentiality and security protections.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 8 -->
+          <section id="international" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">8.</span> International processing</h3>
+            <div class="legal-body-text">
+              <p>
+                OMEF operates and works internationally. Personal data may therefore be transferred to, accessed from, or processed in countries outside the country in which you are located.
+              </p>
+              <p>
+                Where the UK GDPR or other applicable data protection law requires safeguards for an international transfer of personal data, OMEF will use an appropriate lawful transfer mechanism and appropriate safeguards.
+              </p>
+              <p>
+                Depending on the circumstances, these may include an applicable adequacy decision, standard contractual safeguards recognised by applicable data protection law, or another transfer mechanism permitted by applicable law.
+              </p>
+              <p>
+                Where required by law, further information about the safeguards applicable to a particular international transfer may be obtained by contacting us at <a href="mailto:privacy@omef.com" style="color: var(--gold-400);">privacy@omef.com</a>.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 9 -->
+          <section id="retention" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">9.</span> Data retention</h3>
+            <div class="legal-body-text">
+              <p>
+                We retain personal data only for as long as reasonably necessary for the purpose for which it was collected, taking account of our legal, regulatory, operational and reporting obligations.
+              </p>
+              <p>
+                We determine retention periods based on factors such as the purpose for which the information was collected, our legal and regulatory obligations, operational requirements and the need to establish, exercise or defend legal claims.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 10 -->
+          <section id="security" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">10.</span> Security</h3>
+            <div class="legal-body-text">
+              <p>
+                We take reasonable technical and organisational measures to protect personal data against unauthorised access, accidental loss, misuse, alteration or disclosure.
+              </p>
+              <p>
+                However, no internet transmission or electronic storage system can be guaranteed to be completely secure.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 11 -->
+          <section id="your-rights" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">11.</span> Your rights</h3>
+            <div class="legal-body-text">
+              <p>Where UK GDPR or equivalent legislation applies, you may have rights including:</p>
+              <ul class="legal-list">
+                <li>the right to request access to personal data we hold about you;</li>
+                <li>the right to request correction of inaccurate or incomplete data;</li>
+                <li>the right to request deletion in certain circumstances;</li>
+                <li>the right to restrict processing in certain circumstances;</li>
+                <li>the right to object to certain processing;</li>
+                <li>the right to data portability in applicable circumstances;</li>
+                <li>the right to withdraw consent where processing is based on consent; and</li>
+                <li>rights relating to automated decision-making and profiling, where applicable.</li>
+              </ul>
+              <p>
+                To exercise a right, please contact: <a href="mailto:privacy@omef.com" style="color: var(--gold-400); font-weight: 600;">privacy@omef.com</a>. We may need to verify your identity before responding to a request.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 12 -->
+          <section id="complaints" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">12.</span> Complaints</h3>
+            <div class="legal-body-text">
+              <p>
+                If you have concerns about how we handle your personal data, please contact us first at:
+                <a href="mailto:privacy@omef.com" style="color: var(--gold-400); font-weight: 600;">privacy@omef.com</a>
+              </p>
+              <p>
+                Where UK data protection law applies, you may also have the right to complain to the <strong>Information Commissioner's Office (ICO)</strong> or another competent supervisory authority.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 13 -->
+          <section id="children" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">13.</span> Children</h3>
+            <div class="legal-body-text">
+              <p>
+                Our website is not intended to knowingly collect personal data from children without an appropriate lawful basis or, where required, appropriate consent.
+              </p>
+              <p>
+                If you believe that a child has provided personal data to us in circumstances where this should not have occurred, please contact us.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 14 -->
+          <section id="third-party" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">14.</span> Third-party websites</h3>
+            <div class="legal-body-text">
+              <p>
+                Our website may contain links to third-party websites or services.
+              </p>
+              <p>
+                We are not responsible for the privacy practices, security or content of third-party websites. We encourage you to review their privacy notices before providing personal data.
+              </p>
+            </div>
+          </section>
+
+          <!-- Section 15 -->
+          <section id="changes" class="legal-section">
+            <h3 class="legal-section-title"><span class="legal-section-num">15.</span> Changes to this Notice</h3>
+            <div class="legal-body-text">
+              <p>
+                We may update this Notice from time to time to reflect changes in our activities, technology or applicable law.
+              </p>
+              <p>
+                The latest version will be published on this page with its effective date.
+              </p>
+              <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border-hairline); font-size: 0.9rem; color: var(--text-muted);">
+                Our Mother Earth Foundation (OMEF) · <a href="mailto:enquiries@omef.com" style="color: var(--gold-400);">enquiries@omef.com</a>
+              </div>
+            </div>
+          </section>
+        </article>
+
+        <!-- Legal Sticky Sidebar -->
+        <aside class="legal-sidebar">
+          <div class="legal-toc-card">
+            <div class="legal-toc-title"><i class="fa-solid fa-list-ul"></i> Jump to Section</div>
+            <nav class="legal-toc-nav">
+              <a href="#who-we-are" class="legal-toc-link">1. Who we are</a>
+              <a href="#data-we-collect" class="legal-toc-link">2. Personal data collected</a>
+              <a href="#how-we-collect" class="legal-toc-link">3. How we collect data</a>
+              <a href="#how-we-use" class="legal-toc-link">4. How we use data</a>
+              <a href="#lawful-basis" class="legal-toc-link">5. Lawful basis</a>
+              <a href="#communications" class="legal-toc-link">6. Communications</a>
+              <a href="#sharing" class="legal-toc-link">7. Sharing personal data</a>
+              <a href="#international" class="legal-toc-link">8. International processing</a>
+              <a href="#retention" class="legal-toc-link">9. Data retention</a>
+              <a href="#security" class="legal-toc-link">10. Security</a>
+              <a href="#your-rights" class="legal-toc-link">11. Your rights</a>
+              <a href="#complaints" class="legal-toc-link">12. Complaints & ICO</a>
+              <a href="#children" class="legal-toc-link">13. Children</a>
+              <a href="#third-party" class="legal-toc-link">14. Third-party sites</a>
+              <a href="#changes" class="legal-toc-link">15. Changes to Notice</a>
+            </nav>
+          </div>
+
+          <div class="legal-toc-card">
+            <div class="legal-toc-title"><i class="fa-solid fa-scale-balanced"></i> Legal Documents</div>
+            <nav class="legal-toc-nav">
+              <a href="privacy.html" class="legal-toc-link active" style="color: var(--gold-400); font-weight: 600;">Privacy & Data Protection</a>
+              <a href="cookies.html" class="legal-toc-link">Cookies & Tracking</a>
+              <a href="terms.html" class="legal-toc-link">Website Terms of Use</a>
+              <a href="intellectual-property.html" class="legal-toc-link">Intellectual Property</a>
+              <a href="legal-notice.html" class="legal-toc-link">Website Legal Notice</a>
+              <a href="governance.html" class="legal-toc-link">Governance & Structure</a>
+            </nav>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <img src="omef_Logo.png" alt="OMEF" class="footer-logo-img">
+            <div>
+              <span class="brand-title" style="font-size: 1rem;">Our Mother Earth</span>
+              <span class="brand-subtitle">Foundation</span>
+            </div>
+          </div>
+          <p class="footer-tagline-statement">
+            Our Mother Earth Foundation unites people to restore nature, build communities and grow opportunity for future generations.
+          </p>
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--gold-400); letter-spacing: 0.08em;">
+            People. Nature. Future.
+          </span>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">About</h4>
+          <ul class="footer-links-list">
+            <li><a href="about.html#story">About Us</a></li>
+            <li><a href="about.html#mission-vision">Mission and Beliefs</a></li>
+            <li><a href="governance.html">Governance</a></li>
+            <li><a href="governance.html#charter">Charter</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Our Work</h4>
+          <ul class="footer-links-list">
+            <li><a href="our-work.html#pathways">Landscapes</a></li>
+            <li><a href="our-work.html#pathways">Nature Recovery</a></li>
+            <li><a href="our-work.html#pathways">Education</a></li>
+            <li><a href="our-work.html#pathways">Methodologies</a></li>
+            <li><a href="our-work.html#pathways">Community Development</a></li>
+            <li><a href="our-work.html#tano">Tano River Vision</a></li>
+            <li><a href="our-work.html#asanteman">Asanteman Digital</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Impact & Ideas</h4>
+          <ul class="footer-links-list">
+            <li><a href="impact.html">Impact</a></li>
+            <li><a href="impact.html#stories">Stories</a></li>
+            <li><a href="results.html#publications">Publications</a></li>
+            <li><a href="results.html#methodologies">Methodologies</a></li>
+            <li><a href="results.html#news">News</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Events & Partners</h4>
+          <ul class="footer-links-list">
+            <li><a href="kumasi2027.html">Kumasi 2027</a></li>
+            <li><a href="our-work.html#events">COP and Pavilion</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="partners.html#collaborate">Become a Partner</a></li>
+            <li><a href="contact.html">Get Involved</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          © 2026 Our Mother Earth Foundation. All rights reserved.
+        </div>
+        <div class="law-links">
+          <a href="privacy.html">Privacy & Data Protection</a>
+          <span>|</span>
+          <a href="cookies.html">Cookies</a>
+          <span>|</span>
+          <a href="terms.html">Terms of Use</a>
+          <span>|</span>
+          <a href="intellectual-property.html">Intellectual Property</a>
+          <span>|</span>
+          <a href="legal-notice.html">Legal Notice</a>
+          <span>|</span>
+          <a href="governance.html">Organisation & Governance</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="search-modal" aria-hidden="true">
+    <div class="modal-dialog search-modal-dialog">
+      <button class="modal-close-btn" onclick="closeModal('search-modal')"><i class="fa-solid fa-xmark"></i></button>
+      <div class="search-input-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="site-search-input" class="search-input" placeholder="Search programmes, Kumasi 2027, partners, beliefs...">
+      </div>
+      <div class="search-results-list" id="search-results"></div>
+    </div>
+  </div>
+
+  <button class="back-to-top-btn" id="back-to-top"><i class="fa-solid fa-arrow-up"></i></button>
+  <script src="app.js"></script>
+</body>
+</html>

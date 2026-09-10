@@ -1,7 +1,33 @@
 [build]
   publish = "."
 
-# Clean URLs and headers
+# Clean URL Rewrites for Legal & Policy Pages
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/cookies"
+  to = "/cookies.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/intellectual-property"
+  to = "/intellectual-property.html"
+  status = 200
+
+[[redirects]]
+  from = "/legal-notice"
+  to = "/legal-notice.html"
+  status = 200
+
+# Security and caching headers
 [[headers]]
   for = "/*"
   [headers.values]

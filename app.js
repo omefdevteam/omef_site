@@ -13,8 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
   initKeyboardShortcuts();
   initGovSubnav();
+  checkCharterHash();
   removeNetlifyWatermark();
 });
+
+function checkCharterHash() {
+  if (window.location.hash === '#charter' || window.location.hash === '#charter-modal') {
+    setTimeout(() => {
+      if (typeof openModal === 'function' && document.getElementById('charter-modal')) {
+        openModal('charter-modal');
+      }
+    }, 250);
+  }
+}
 
 function removeNetlifyWatermark() {
   const clean = () => {
@@ -171,83 +182,41 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 /* ==========================================================================
-   LEGAL POLICIES MODAL CONTROLLER
+   LEGAL POLICIES ROUTING (Direct Fallback for Legacy Calls)
    ========================================================================== */
-const legalContents = {
-  privacy: {
-    title: 'Privacy Notice',
-    tag: 'Data Protection & Ethics',
-    content: `
-      <p><strong>Our Mother Earth Foundation Privacy Notice:</strong></p>
-      <p>We respect your privacy and protect all personal data submitted to the Foundation. We will use the information you provide exclusively to review and respond to your enquiry, manage partnerships, and communicate official programme updates in accordance with applicable data protection laws.</p>
-      <p>We never sell, trade, or share user details with unauthorized commercial third parties.</p>
-    `
-  },
-  terms: {
-    title: 'Terms of Use',
-    tag: 'Public Legal Terms',
-    content: `
-      <p><strong>Foundation Terms of Use:</strong></p>
-      <p>All materials, including text, research papers, methodologies, and visual marks on this website, are published for public benefit and public-interest educational purposes.</p>
-      <p>No party may misrepresent affiliation with Our Mother Earth Foundation or make unauthorized commercial use of our emblems and trademarks.</p>
-    `
-  },
-  accessibility: {
-    title: 'Accessibility Statement',
-    tag: 'Inclusion Standard',
-    content: `
-      <p><strong>Commitment to Digital Accessibility:</strong></p>
-      <p>OMEF is committed to ensuring digital accessibility for all people, including those with visual, auditory, cognitive, or physical impairments. This website complies with WCAG 2.1 AA guidelines, featuring high contrast ratios, screen reader compatibility, and keyboard navigation.</p>
-    `
-  },
-  safeguarding: {
-    title: 'Safeguarding Policy',
-    tag: 'Protection & Integrity',
-    content: `
-      <p><strong>Do-No-Harm & Safeguarding Standards:</strong></p>
-      <p>All OMEF community programs, river restoration projects, and youth educational initiatives operate under strict safeguarding protocols. We ensure informed community consent, respect for indigenous land rights, and safe environments for vulnerable youth and learners.</p>
-    `
-  },
-  complaints: {
-    title: 'Complaints & Grievance Mechanism',
-    tag: 'Accountability Route',
-    content: `
-      <p><strong>Transparent Grievance Handling:</strong></p>
-      <p>OMEF maintains an independent, confidential grievance and inquiry mechanism for community members, partners, and the public to raise concerns regarding program execution, governance integrity, or safeguarding.</p>
-      <p>Enquiries can be directed to: <a href="mailto:governance@ourmotherearth.org" style="color: var(--gold-400);">governance@ourmotherearth.org</a>.</p>
-    `
-  },
-  org: {
-    title: 'Organisation Details & Public Status',
-    tag: 'Constitutional Entity',
-    content: `
-      <p><strong>Legal Description:</strong></p>
-      <p>Our Mother Earth Foundation (OMEF) is an international public-interest foundation dedicated to climate resilience, ecological restoration, sustainable development, and education.</p>
-      <p>Convening Location: Kumasi, Ashanti Region, Ghana, with partner networks across Africa and globally.</p>
-    `
-  }
-};
-
 window.openLegalModal = function(policyKey) {
-  const policy = legalContents[policyKey] || legalContents.privacy;
-  const title = document.getElementById('legal-title');
-  const tag = document.getElementById('legal-tag');
-  const content = document.getElementById('legal-content');
-
-  if (title) title.textContent = policy.title;
-  if (tag) tag.innerHTML = `<i class="fa-solid fa-scale-balanced"></i> ${policy.tag}`;
-  if (content) content.innerHTML = policy.content;
-
-  openModal('legal-modal');
+  const map = {
+    privacy: 'privacy.html',
+    cookies: 'cookies.html',
+    terms: 'terms.html',
+    intellectual_property: 'intellectual-property.html',
+    legal_notice: 'legal-notice.html',
+    accessibility: 'terms.html',
+    safeguarding: 'privacy.html',
+    complaints: 'terms.html',
+    org: 'legal-notice.html'
+  };
+  if (map[policyKey]) {
+    window.location.href = map[policyKey];
+  } else {
+    window.location.href = 'privacy.html';
+  }
 };
 
 /* ==========================================================================
    MULTI-TRACK CONTACT FORM HANDLING
    ========================================================================== */
 window.setContactInquiry = function(inquiryType) {
-  if (window.location.pathname.endsWith('contact.html')) {
+  if (window.location.pathname.includes('contact')) {
     const select = document.getElementById('contact-inquiry-type');
-    if (select) select.value = inquiryType;
+    if (select) {
+      for (let option of select.options) {
+        if (option.value.toLowerCase().includes(inquiryType.toLowerCase()) || inquiryType.toLowerCase().includes(option.value.toLowerCase())) {
+          select.value = option.value;
+          break;
+        }
+      }
+    }
     const formHub = document.getElementById('contact-hub');
     if (formHub) formHub.scrollIntoView({ behavior: 'smooth' });
   } else {
@@ -261,12 +230,19 @@ function initContactForm() {
 
   if (!form) return;
 
-  // Check URL query param for inquiry type
+  // Check URL query param for inquiry type (type or inquiry)
   const urlParams = new URLSearchParams(window.location.search);
-  const typeParam = urlParams.get('type');
+  const typeParam = urlParams.get('type') || urlParams.get('inquiry');
   if (typeParam) {
     const select = document.getElementById('contact-inquiry-type');
-    if (select) select.value = typeParam;
+    if (select) {
+      for (let option of select.options) {
+        if (option.value.toLowerCase().includes(typeParam.toLowerCase()) || typeParam.toLowerCase().includes(option.value.toLowerCase())) {
+          select.value = option.value;
+          break;
+        }
+      }
+    }
   }
 
   form.addEventListener('submit', (e) => {
@@ -285,32 +261,32 @@ function initContactForm() {
       if (el) el.classList.remove('error');
     });
 
-    if (!inquiryType.value) {
-      inquiryType.classList.add('error');
+    if (!inquiryType || !inquiryType.value) {
+      if (inquiryType) inquiryType.classList.add('error');
       isValid = false;
     }
-    if (!name.value.trim()) {
-      name.classList.add('error');
+    if (!name || !name.value.trim()) {
+      if (name) name.classList.add('error');
       isValid = false;
     }
-    if (!email.value.trim() || !email.value.includes('@')) {
-      email.classList.add('error');
+    if (!email || !email.value.trim() || !email.value.includes('@')) {
+      if (email) email.classList.add('error');
       isValid = false;
     }
-    if (!message.value.trim()) {
-      message.classList.add('error');
+    if (!message || !message.value.trim()) {
+      if (message) message.classList.add('error');
       isValid = false;
     }
-    if (!consent || !consent.checked) {
+    if (consent && consent.hasAttribute('required') && !consent.checked) {
       isValid = false;
     }
 
     if (!isValid) {
       if (feedbackArea) {
         feedbackArea.innerHTML = `
-          <div style="margin-bottom: 20px; padding: 14px 18px; border-radius: var(--radius-sm); background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--gold-300); display: flex; gap: 12px; align-items: center; font-size: 0.9rem;">
-            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; color: var(--gold-400); flex-shrink: 0;"></i>
-            <div>Please review the highlighted fields and provide the required information to send your enquiry.</div>
+          <div style="margin-bottom: 20px; padding: 16px 20px; border-radius: var(--radius-sm); background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--gold-300); display: flex; gap: 12px; align-items: flex-start; font-size: 0.92rem; line-height: 1.6;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem; color: var(--gold-400); flex-shrink: 0; margin-top: 2px;"></i>
+            <div>Please review the highlighted fields and provide the information needed to send your enquiry.</div>
           </div>
         `;
         feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -319,21 +295,25 @@ function initContactForm() {
     }
 
     const submitBtn = form.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.innerHTML;
-    submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Submitting...`;
-    submitBtn.disabled = true;
+    const originalBtnText = submitBtn ? submitBtn.innerHTML : '';
+    if (submitBtn) {
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Sending enquiry...`;
+      submitBtn.disabled = true;
+    }
 
     setTimeout(() => {
-      submitBtn.innerHTML = originalBtnText;
-      submitBtn.disabled = false;
+      if (submitBtn) {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+      }
       form.reset();
       if (feedbackArea) {
         feedbackArea.innerHTML = `
-          <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-md); background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #ecfdf5; display: flex; gap: 16px; align-items: flex-start; font-size: 0.95rem; line-height: 1.65;">
-            <i class="fa-solid fa-circle-check" style="font-size: 1.5rem; color: var(--emerald-accent); margin-top: 2px; flex-shrink: 0;"></i>
+          <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-sm); background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.35); color: #d1fae5; display: flex; gap: 14px; align-items: flex-start; line-height: 1.6;">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.3rem; color: var(--emerald-400); flex-shrink: 0; margin-top: 2px;"></i>
             <div>
-              <h4 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 6px; font-weight: 600;">Enquiry Received</h4>
-              <p>Thank you for contacting Our Mother Earth Foundation. We have received your enquiry and will direct it to the appropriate team. In the meantime, you may wish to explore our programmes, upcoming events or latest insights.</p>
+              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Thank you for contacting Our Mother Earth Foundation.</strong>
+              We have received your enquiry and will direct it to the appropriate team. In the meantime, you may wish to explore our programmes, upcoming events or latest insights.
             </div>
           </div>
         `;
@@ -344,9 +324,34 @@ function initContactForm() {
 }
 
 /* ==========================================================================
-   INSTANT SEARCH INDEX & MODAL (Multi-Page Deep Linking)
+   GLOBAL SEARCH DATABASE & INDEX
    ========================================================================== */
 const searchDatabase = [
+  {
+    title: 'Privacy & Data Protection Notice',
+    snippet: 'Official UK GDPR and international data protection notice: rights, data controller contact, retention, and processing principles.',
+    link: 'privacy.html'
+  },
+  {
+    title: 'Cookies & Online Tracking Notice',
+    snippet: 'Audited reality: 0 tracking or advertising cookies, strictly necessary CDN assets, and affirmative prior consent standards.',
+    link: 'cookies.html'
+  },
+  {
+    title: 'Website Terms of Use',
+    snippet: 'Governing terms, acceptable use, disclaimers, external linking, and institutional copyright framework.',
+    link: 'terms.html'
+  },
+  {
+    title: 'Intellectual Property & Copyright Notice',
+    snippet: 'Copyright guidelines, educational quotations, commercial licensing requests, and trademark usage rules.',
+    link: 'intellectual-property.html'
+  },
+  {
+    title: 'Website Legal Notice',
+    snippet: 'Official operational scope, institutional contacts, legal jurisdiction, and regulatory transparency.',
+    link: 'legal-notice.html'
+  },
   {
     title: 'People. Nature. Future.',
     snippet: 'Core foundation philosophy and mission: what we protect today is the start of a better future.',
@@ -373,8 +378,8 @@ const searchDatabase = [
     link: 'about.html#mission-vision'
   },
   {
-    title: 'Our 7 Core Beliefs',
-    snippet: 'We love our children. We are sons and daughters of Mother Earth. There is power in partnership. It takes a village.',
+    title: 'O-M-E-F Core Beliefs',
+    snippet: 'One Earth. Meaningful change is built. Every generation inherits. Future solutions start now. It takes a village.',
     link: 'about.html#beliefs'
   },
   {
@@ -423,8 +428,8 @@ const searchDatabase = [
     link: 'our-work.html#pathways'
   },
   {
-    title: 'How We Deliver: 6-Phase Discipline',
-    snippet: 'Listen & understand, Co-design, Capable partnerships, Phased delivery, Measure & adapt, Proof points.',
+    title: 'How We Deliver: 5-Phase Discipline',
+    snippet: '1. Listen and understand, 2. Co-design the response, 3. Build capable partnerships, 4. Deliver in phases, 5. Measure and adapt.',
     link: 'our-work.html#delivery'
   },
   {
@@ -464,7 +469,7 @@ const searchDatabase = [
   },
   {
     title: 'Featured Partners Hub',
-    snippet: 'Monarchex, ESG News, Cyber Future Foundation, AgriLedger, and Climate Live.',
+    snippet: 'ESG News, Cyber Future Foundation, AgriLedger, and Climate Live.',
     link: 'partners.html'
   },
   {
@@ -473,14 +478,14 @@ const searchDatabase = [
     link: 'results.html#methodologies'
   },
   {
-    title: 'News & Media Kit',
-    snippet: 'Approved organization description, brand guidelines, and official logo download.',
-    link: 'results.html#media'
+    title: 'News & Media Centre',
+    snippet: 'A rolling record of programme developments, event announcements, approved short description, and media kit downloads.',
+    link: 'results.html#news'
   },
   {
     title: 'Get Involved & Support a Programme',
     snippet: 'Become a Partner, Support a Programme, Join Our Network, or Participate.',
-    link: 'contact.html'
+    link: 'contact.html#get-involved'
   },
   {
     title: 'Contact & Multi-Track Enquiry Hub',
