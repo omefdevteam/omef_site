@@ -175,6 +175,8 @@ select {
 
 .container-narrow {
   max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-padding {
@@ -437,12 +439,13 @@ select {
 }
 
 .brand-subtitle {
-  font-size: 0.68rem;
-  color: var(--gold-400);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-top: 2px;
+  font-size: 1.05rem;
+  color: #064e3b;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  text-transform: none;
+  margin-top: 0;
 }
 
 /* Navigation Links - Uncrowded, Elegant Spacing */
@@ -1611,7 +1614,9 @@ select {
 }
 
 .contact-info-panel .brand-subtitle {
-  color: var(--gold-500);
+  color: #064e3b;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
 
 .contact-form-panel {
@@ -1671,9 +1676,21 @@ select {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background: #ecfdf5;
-  border: 1px solid #10b981;
-  color: #065f46;
+  background: #064e3b;
+  border: 1.5px solid rgba(52, 211, 153, 0.5);
+  border-left: 6px solid var(--emerald-400, #34d399);
+  color: #ffffff;
+  padding: 18px 24px 18px 20px;
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 4px 14px rgba(6, 78, 59, 0.5);
+}
+.form-feedback-alert.success strong {
+  color: #ffffff;
+}
+.form-feedback-alert.success i {
+  color: var(--emerald-400, #34d399);
+  font-size: 1.45rem;
+  margin-top: 2px;
 }
 
 .form-feedback-alert.validation {
@@ -2368,7 +2385,10 @@ select {
   }
 
   .brand-subtitle {
-    display: none;
+    font-size: 0.92rem;
+    color: #064e3b;
+    font-weight: 700;
+    line-height: 1.15;
   }
 
   .nav-actions .btn {
@@ -3414,6 +3434,32 @@ select {
 }
 
 /* ==========================================================================
+   HIDE NETLIFY WATERMARK / FEEDBACK DRAWER
+   ========================================================================== */
+#netlify-feedback-drawer,
+iframe#netlify-drawer,
+div[data-netlify-drawer],
+[class*="netlify-drawer"],
+[id*="netlify-drawer"],
+[class*="feedback-drawer"],
+[data-testid*="netlify-drawer"],
+div[class*="netlify-badge"],
+.netlify-badge,
+a[href*="netlify.com"][class*="badge"],
+div:has(> a[href*="netlify.com"]) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
+
+/* ==========================================================================
    DEDICATED LEGAL & POLICY PAGES LAYOUT
    ========================================================================== */
 .legal-layout-grid {
@@ -4140,4 +4186,142 @@ select {
   border: 1px solid rgba(217, 119, 6, 0.35);
   color: var(--gold-300);
   white-space: nowrap;
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATIONS (POPUP ALERTS)
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  top: 28px;
+  right: 28px;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: none;
+  max-width: 480px;
+  width: calc(100% - 40px);
+}
+
+.toast {
+  pointer-events: auto;
+  position: relative;
+  background: #064e3b;
+  color: #ffffff;
+  border: 1.5px solid rgba(52, 211, 153, 0.5);
+  border-left: 6px solid var(--emerald-400, #34d399);
+  border-radius: var(--radius-md, 12px);
+  padding: 18px 44px 18px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 4px 14px rgba(6, 78, 59, 0.5);
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  line-height: 1.55;
+  font-size: 0.95rem;
+  animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: all 0.3s ease;
+}
+
+.toast.toast-success {
+  border-left-color: var(--emerald-400, #34d399);
+}
+
+.toast.toast-error {
+  background: #7f1d1d;
+  border-color: rgba(248, 113, 113, 0.4);
+  border-left-color: #f87171;
+}
+
+.toast-icon {
+  font-size: 1.45rem;
+  color: var(--emerald-400, #34d399);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.toast-error .toast-icon {
+  color: #f87171;
+}
+
+.toast-content {
+  flex: 1;
+}
+
+.toast-title {
+  font-weight: 700;
+  font-size: 1.04rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+  line-height: 1.35;
+}
+
+.toast-message {
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.toast-message strong {
+  color: var(--gold-300, #fcd34d);
+  font-weight: 700;
+}
+
+.toast-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 1.15rem;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.toast-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.toast.toast-hiding {
+  animation: toastSlideOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateY(-24px) scale(0.94);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-20px) scale(0.94);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .toast-container {
+    top: 16px;
+    right: 14px;
+    left: 14px;
+    width: auto;
+    max-width: none;
+  }
 }

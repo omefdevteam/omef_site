@@ -1,9 +1,5 @@
 [build]
-  # Site statique : aucune etape de compilation. La commande vide empeche
-  # Netlify de detecter et d'executer un build. Les outils de verification
-  # vivent dans ci/ (hors racine) precisement pour ne rien declencher ici.
   publish = "."
-  command = ""
 
 # Clean URL Rewrites for Legal & Policy Pages
 [[redirects]]
