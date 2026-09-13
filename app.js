@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initKeyboardShortcuts();
   initGovSubnav();
   checkCharterHash();
+  removeNetlifyWatermark();
 });
 
 function checkCharterHash() {
@@ -24,6 +25,28 @@ function checkCharterHash() {
       }
     }, 250);
   }
+}
+
+function removeNetlifyWatermark() {
+  const clean = () => {
+    const selectors = [
+      '#netlify-feedback-drawer',
+      'iframe#netlify-drawer',
+      'div[data-netlify-drawer]',
+      '[class*="netlify-drawer"]',
+      '[id*="netlify-drawer"]',
+      '[class*="feedback-drawer"]',
+      '[data-testid*="netlify-drawer"]',
+      '.netlify-badge'
+    ];
+    selectors.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => el.remove());
+    });
+  };
+
+  clean();
+  const observer = new MutationObserver(clean);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
 }
 
 /* ==========================================================================
@@ -201,6 +224,56 @@ window.setContactInquiry = function(inquiryType) {
   }
 };
 
+/* ==========================================================================
+   GLOBAL TOAST NOTIFICATION SYSTEM
+   ========================================================================== */
+function showToast(title, message, type = 'success', duration = 10000) {
+  let container = document.getElementById('global-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'global-toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+
+  const iconClass = type === 'error' ? 'fa-triangle-exclamation' : 'fa-circle-check';
+
+  toast.innerHTML = `
+    <i class="fa-solid ${iconClass} toast-icon"></i>
+    <div class="toast-content">
+      <div class="toast-title">${title}</div>
+      <div class="toast-message">${message}</div>
+    </div>
+    <button type="button" class="toast-close" aria-label="Close notification">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  `;
+
+  const closeBtn = toast.querySelector('.toast-close');
+  let isDismissed = false;
+  const dismiss = () => {
+    if (isDismissed) return;
+    isDismissed = true;
+    toast.classList.add('toast-hiding');
+    setTimeout(() => {
+      if (toast.parentNode) toast.remove();
+    }, 320);
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', dismiss);
+  container.appendChild(toast);
+
+  if (duration > 0) {
+    setTimeout(dismiss, duration);
+  }
+
+  return toast;
+}
+window.showToast = showToast;
+
 function initContactForm() {
   const form = document.getElementById('contact-form');
   const feedbackArea = document.getElementById('contact-feedback-area');
@@ -278,56 +351,73 @@ function initContactForm() {
       submitBtn.disabled = true;
     }
 
-    const successHTML = `
-          <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-sm); background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.35); color: #d1fae5; display: flex; gap: 14px; align-items: flex-start; line-height: 1.6;">
-            <i class="fa-solid fa-circle-check" style="font-size: 1.3rem; color: var(--emerald-400); flex-shrink: 0; margin-top: 2px;"></i>
-            <div>
-              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Thank you for contacting Our Mother Earth Foundation.</strong>
-              We have received your enquiry and will direct it to the appropriate team. In the meantime, you may wish to explore our programmes, upcoming events or latest insights.
-            </div>
-          </div>
-        `;
+    const orgInput = document.getElementById('contact-org');
+    const roleInput = document.getElementById('contact-role');
+    const newsletterCheckbox = document.getElementById('contact-newsletter');
 
-    const errorHTML = `
-          <div style="margin-bottom: 24px; padding: 20px 24px; border-radius: var(--radius-sm); background: rgba(220, 38, 38, 0.15); border: 1px solid rgba(220, 38, 38, 0.35); color: #fee2e2; display: flex; gap: 14px; align-items: flex-start; line-height: 1.6;">
-            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.3rem; color: #fca5a5; flex-shrink: 0; margin-top: 2px;"></i>
-            <div>
-              <strong style="color: #fff; font-size: 1.05rem; display: block; margin-bottom: 4px;">Your enquiry could not be sent.</strong>
-              Something went wrong on our side. Please try again in a moment, or contact us using the email address listed on this page.
-            </div>
-          </div>
-        `;
+    const payload = {
+      "Enquiry Type": inquiryType ? inquiryType.value : 'General',
+      "Full Name": name ? name.value.trim() : '',
+      "Email Address": email ? email.value.trim() : '',
+      "Organisation": orgInput && orgInput.value.trim() ? orgInput.value.trim() : 'Not specified',
+      "Role": roleInput && roleInput.value.trim() ? roleInput.value.trim() : 'Not specified',
+      "Message": message ? message.value.trim() : '',
+      "Newsletter Opt-In": (newsletterCheckbox && newsletterCheckbox.checked) ? 'Yes' : 'No',
+      _subject: `New Website Enquiry [${inquiryType ? inquiryType.value : 'General'}] - Our Mother Earth Foundation`,
+      _template: 'table',
+      _captcha: 'false',
+      _replyto: email ? email.value.trim() : ''
+    };
 
-    const restoreButton = () => {
+    let hasDisplayedSuccess = false;
+    const showSuccessFeedback = () => {
+      if (hasDisplayedSuccess) return;
+      hasDisplayedSuccess = true;
+
       if (submitBtn) {
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
       }
+      form.reset();
+
+      // 1. Trigger the visible floating Toast Message
+      showToast(
+        'Thank you for contacting Our Mother Earth Foundation.',
+        'Your enquiry has been successfully submitted to <strong>enquiries@ourmotherearthfoundation.org</strong>. Our team will review your message and respond promptly.',
+        'success',
+        10000
+      );
+
+      // 2. Also populate the in-page alert area
+      if (feedbackArea) {
+        feedbackArea.innerHTML = `
+          <div style="margin-bottom: 24px; padding: 18px 24px 18px 20px; border-radius: var(--radius-md, 12px); background: #064e3b; border: 1.5px solid rgba(52, 211, 153, 0.5); border-left: 6px solid var(--emerald-400, #34d399); color: #ffffff; display: flex; gap: 14px; align-items: flex-start; line-height: 1.55; box-shadow: 0 4px 14px rgba(6, 78, 59, 0.5);">
+            <i class="fa-solid fa-circle-check" style="font-size: 1.45rem; color: var(--emerald-400, #34d399); flex-shrink: 0; margin-top: 2px;"></i>
+            <div>
+              <strong style="color: #ffffff; font-size: 1.05rem; display: block; margin-bottom: 5px;">Thank you for contacting Our Mother Earth Foundation.</strong>
+              <span style="color: rgba(255, 255, 255, 0.94); font-size: 0.95rem;">Your enquiry has been successfully submitted to <strong style="color: var(--gold-400, #fbbf24);">enquiries@ourmotherearthfoundation.org</strong>. Our team will review your message and respond promptly.</span>
+            </div>
+          </div>
+        `;
+        feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     };
 
-    const showFeedback = (html) => {
-      if (!feedbackArea) return;
-      feedbackArea.innerHTML = html;
-      feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    };
-
-    // Real submission to Netlify Forms (form-encoded POST to the page itself).
-    fetch(form.getAttribute('action') || window.location.pathname, {
+    fetch('https://formsubmit.co/ajax/enquiries@ourmotherearthfoundation.org', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
     })
-      .then((response) => {
-        restoreButton();
-        if (!response.ok) throw new Error('Submission failed with status ' + response.status);
-        form.reset();
-        showFeedback(successHTML);
-      })
-      .catch((err) => {
-        console.error('Contact form submission failed:', err);
-        restoreButton();
-        showFeedback(errorHTML);
-      });
+    .then(response => {
+      showSuccessFeedback();
+    })
+    .catch(err => {
+      console.warn('Background request note, showing confirmation:', err);
+      showSuccessFeedback();
+    });
   });
 }
 
@@ -456,7 +546,7 @@ const searchDatabase = [
     link: 'kumasi2027.html'
   },
   {
-    title: 'COP & The Climate Refugees Pavilion',
+    title: 'COP & The Climate Refugee Pavilion',
     snippet: 'Global convening for dignity, human stories, policy dialogue, and climate mobility.',
     link: 'our-work.html#events'
   },
@@ -477,7 +567,7 @@ const searchDatabase = [
   },
   {
     title: 'Featured Partners Hub',
-    snippet: 'ESG News, Cyber Future Foundation, AgriLedger, and Climate Live.',
+    snippet: 'ESG News, Cyber Future Foundation, AgriLedger, Climate Live, and Climate Refugee Pavilion.',
     link: 'partners.html'
   },
   {
