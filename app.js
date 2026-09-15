@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initKeyboardShortcuts();
   initGovSubnav();
   checkCharterHash();
-  removeNetlifyWatermark();
 });
 
 function checkCharterHash() {
@@ -25,28 +24,6 @@ function checkCharterHash() {
       }
     }, 250);
   }
-}
-
-function removeNetlifyWatermark() {
-  const clean = () => {
-    const selectors = [
-      '#netlify-feedback-drawer',
-      'iframe#netlify-drawer',
-      'div[data-netlify-drawer]',
-      '[class*="netlify-drawer"]',
-      '[id*="netlify-drawer"]',
-      '[class*="feedback-drawer"]',
-      '[data-testid*="netlify-drawer"]',
-      '.netlify-badge'
-    ];
-    selectors.forEach(sel => {
-      document.querySelectorAll(sel).forEach(el => el.remove());
-    });
-  };
-
-  clean();
-  const observer = new MutationObserver(clean);
-  observer.observe(document.documentElement, { childList: true, subtree: true });
 }
 
 /* ==========================================================================
@@ -355,19 +332,16 @@ function initContactForm() {
     const roleInput = document.getElementById('contact-role');
     const newsletterCheckbox = document.getElementById('contact-newsletter');
 
-    const payload = {
-      "Enquiry Type": inquiryType ? inquiryType.value : 'General',
-      "Full Name": name ? name.value.trim() : '',
-      "Email Address": email ? email.value.trim() : '',
-      "Organisation": orgInput && orgInput.value.trim() ? orgInput.value.trim() : 'Not specified',
-      "Role": roleInput && roleInput.value.trim() ? roleInput.value.trim() : 'Not specified',
-      "Message": message ? message.value.trim() : '',
-      "Newsletter Opt-In": (newsletterCheckbox && newsletterCheckbox.checked) ? 'Yes' : 'No',
-      _subject: `New Website Enquiry [${inquiryType ? inquiryType.value : 'General'}] - Our Mother Earth Foundation`,
-      _template: 'table',
-      _captcha: 'false',
-      _replyto: email ? email.value.trim() : ''
-    };
+    const body = new URLSearchParams({
+      'form-name': 'contact',
+      inquiry_type: inquiryType ? inquiryType.value : '',
+      name: name ? name.value.trim() : '',
+      email: email ? email.value.trim() : '',
+      organisation: orgInput && orgInput.value.trim() ? orgInput.value.trim() : '',
+      role: roleInput && roleInput.value.trim() ? roleInput.value.trim() : '',
+      message: message ? message.value.trim() : '',
+      newsletter_opt_in: (newsletterCheckbox && newsletterCheckbox.checked) ? 'Yes' : 'No'
+    });
 
     let hasDisplayedSuccess = false;
     const showSuccessFeedback = () => {
@@ -403,20 +377,37 @@ function initContactForm() {
       }
     };
 
-    fetch('https://formsubmit.co/ajax/enquiries@ourmotherearthfoundation.org', {
+    const showErrorFeedback = () => {
+      if (submitBtn) {
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+      }
+      if (feedbackArea) {
+        feedbackArea.innerHTML = `
+          <div style="margin-bottom: 24px; padding: 18px 24px; border-radius: var(--radius-md, 12px); background: #7c2d12; border-left: 6px solid #f59e0b; color: #ffffff; display: flex; gap: 14px; align-items: flex-start; line-height: 1.55;">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.45rem; color: #fbbf24; flex-shrink: 0; margin-top: 2px;"></i>
+            <div>
+              <strong style="color: #ffffff; font-size: 1.05rem; display: block; margin-bottom: 5px;">Your enquiry could not be sent.</strong>
+              <span style="color: rgba(255,255,255,0.94); font-size: 0.95rem;">Please try again, or email us directly at <strong style="color: #fbbf24;">enquiries@ourmotherearthfoundation.org</strong>.</span>
+            </div>
+          </div>
+        `;
+        feedbackArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    };
+
+    fetch('/contact.html', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(payload)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString()
     })
     .then(response => {
+      if (!response.ok) throw new Error('HTTP ' + response.status);
       showSuccessFeedback();
     })
     .catch(err => {
-      console.warn('Background request note, showing confirmation:', err);
-      showSuccessFeedback();
+      console.error('Contact form submission failed:', err);
+      showErrorFeedback();
     });
   });
 }
