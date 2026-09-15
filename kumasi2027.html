@@ -393,10 +393,11 @@
               </div>
             </div>
 
-            <form id="k-page-form" action="https://formsubmit.co/enquiries@ourmotherearthfoundation.org" method="POST" onsubmit="event.preventDefault(); submitKumasiPageForm();">
-              <input type="hidden" name="_subject" value="Kumasi 2027 Registration of Interest - Our Mother Earth Foundation">
-              <input type="hidden" name="_template" value="table">
-              <input type="hidden" name="_captcha" value="false">
+            <form id="k-page-form" name="kumasi2027" method="POST" action="/kumasi2027.html" data-netlify="true" netlify-honeypot="bot-field" onsubmit="event.preventDefault(); submitKumasiPageForm();">
+              <input type="hidden" name="form-name" value="kumasi2027">
+              <p class="hidden" style="display:none;">
+                <label>Do not fill this in: <input name="bot-field"></label>
+              </p>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label" for="kp-name">Full Name *</label>
@@ -614,32 +615,46 @@
         form.reset();
       };
 
-      fetch('https://formsubmit.co/ajax/enquiries@ourmotherearthfoundation.org', {
+      const showErrorFeedback = () => {
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
+        if (feedback) {
+          feedback.style.display = 'flex';
+          feedback.innerHTML = `
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.4rem; color: #b45309; flex-shrink: 0; margin-top: 2px;"></i>
+            <div style="color: #7c2d12;">
+              <strong style="color: #7c2d12; font-size: 1.05rem; display: block; margin-bottom: 4px;">Your registration could not be sent.</strong>
+              Please try again, or email us directly at <strong>enquiries@ourmotherearthfoundation.org</strong>.
+            </div>
+          `;
+          feedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      };
+
+      const body = new URLSearchParams({
+        'form-name': 'kumasi2027',
+        name: name,
+        email: email,
+        organisation: org,
+        participation_track: track,
+        message_or_contribution: notes,
+        delegation_updates: updates
+      });
+
+      fetch('/kumasi2027.html', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          "Submission Type": "Kumasi 2027 Registration of Interest",
-          "Full Name": name,
-          "Email Address": email,
-          "Organisation / Affiliation": org,
-          "Participation Track": track,
-          "Proposed Contribution / Notes": notes,
-          "Email Updates Consent": updates,
-          _subject: `Kumasi 2027 Registration: ${name} [${track}]`,
-          _template: 'table',
-          _captcha: 'false',
-          _replyto: email
-        })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
       })
       .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
         showSuccessFeedback();
       })
       .catch(err => {
-        console.warn('Background request note, showing confirmation:', err);
-        showSuccessFeedback();
+        console.error('Kumasi form submission failed:', err);
+        showErrorFeedback();
       });
     }
   </script>
